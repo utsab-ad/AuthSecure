@@ -15,12 +15,10 @@ const Signup = () => {
   
     const navigate = useNavigate();
   
-    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  
     const handleSubmit = (e) => {
       e.preventDefault();
       axios
-        .post(`${BASE_URL}/auth/signup`, {
+        .post(`${import.meta.env.VITE_API_BASE_URL}/auth/signup`, {
           name,
           email,
           contact,

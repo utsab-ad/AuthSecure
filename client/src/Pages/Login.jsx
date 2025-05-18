@@ -10,14 +10,13 @@ import { setUser } from "../../redux/user/user.slice.js";
 const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-    const BASE_URL = import.meta.env.VITE_API_BASE_URL;
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post(`${BASE_URL}/auth/login`, {
+    axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, {
       email,
       password
     }, { withCredentials: true })
