@@ -30,7 +30,7 @@ const UpdateBlog = () => {
  const Update = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:5050/blog/api/edit-blog/"+blogid, {
+      .put(`${import.meta.env.VITE_API_BASE_URL}/blog/api/edit-blog/`+blogid, {
         title,
         slug,
         author,

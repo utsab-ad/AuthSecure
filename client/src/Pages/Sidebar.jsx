@@ -245,7 +245,7 @@ const Sidebar = () => {
                  <IoMdArrowRoundBack/>
                </button>
         <Outlet />
-        <Footer />
+      <Footer />
       </div>
     </div>
   );
