@@ -24,7 +24,7 @@ const BlogDetail = () => {
 
   useEffect(() => {
     axios
-        .get(`${import.meta.env.VITE_API_BASE_URL}/blog/api/get-blog/` + blogid)
+      .get(`${import.meta.env.VITE_API_BASE_URL}/blog/api/get-blog/` + blogid)
       .then((result) => {
         setTitle(result.data.title);
         setSlug(result.data.slug);
@@ -39,19 +39,47 @@ const BlogDetail = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const handleShare = async () => {
+    const shareData = {
+      title,
+      text: `Check out this blog post: ${title}`,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.error("Share failed:", err);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        alert("Link copied to clipboard!");
+      } catch (err) {
+        alert("Failed to copy link.");
+        console.error("Clipboard error:", err);
+      }
+    }
+  };
+
   return (
-      <main className="w-full px-4 md:px-12 py-8 max-w-6xl mx-auto">
+    <main className="w-full px-4 md:px-12 py-8 max-w-6xl mx-auto">
       {/* Title */}
       <header className="mb-8 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-indigo-600 leading-tight">
           {title}
         </h1>
-        <p className="text-sm text-gray-500 dark:text-indigo-400 mt-2">{slug}</p>
+        <p className="text-sm text-gray-500 dark:text-indigo-400 mt-2">
+          {slug}
+        </p>
       </header>
 
       {/* Controls */}
       <div className="flex justify-end gap-2 mb-4">
         <Button
+          onClick={handleShare}
           variant="outline"
           className="p-2 hover:bg-gray-100 transition dark:hover:text-black"
         >
