@@ -17,10 +17,9 @@ import { FaHome } from "react-icons/fa";
 const HomePage = () => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
  useEffect(() => {
-  axios.get(`${BASE_URL}/in/users`, { withCredentials: true })
+  axios.get(`${import.meta.env.VITE_API_BASE_URL}/in/users`, { withCredentials: true })
     .then(result => {
       if (result.data && result.data.user) {
         setUsers(result.data.user);
@@ -36,7 +35,7 @@ const HomePage = () => {
 
  const handleLogout = async () => {
   try {
-    const res = await axios.get(`${BASE_URL}/auth/logout`, {
+    const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/auth/logout`, {
       withCredentials: true,
     });
 
