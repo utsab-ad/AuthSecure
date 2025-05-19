@@ -2,14 +2,12 @@ import FileCounter from "@/Components/FileCounter";
 import GitHubActivity from "@/Components/GitHubActivity";
 import Languages from "@/Components/Languages";
 import LatestBlog from "@/Components/LatestBlog";
-// import LatestBlog from "@/Components/LatestBlog";
-// import { Languages } from "lucide-react";
+import ProjectIndex from "@/Components/ProjectsIndex";
 import React, { useEffect } from "react";
 
 const Index = () => {
-  
   return (
-<div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-100 to-white dark:from-gray-900 dark:via-slate-800 dark:to-gray-950 text-gray-800 dark:text-white font-sans transition-colors duration-500">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-100 to-white dark:from-gray-900 dark:via-slate-800 dark:to-gray-950 text-gray-800 dark:text-white font-sans transition-colors duration-500">
       {/* Main Container */}
       <div className="max-w-7xl mx-auto px-4 py-16 flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
         {/* Text Section */}
@@ -57,10 +55,9 @@ const Index = () => {
       <div id="lang" className="mx-2">
         <Languages />
       </div>
-      
 
       <div id="projects" className="mx-2 my-3">
-{/* <ProjectsIndex/> */}
+        <ProjectIndex/>
       </div>
 
       <div className="flex flex-col justify-center items-center p-2 md:block hidden">
