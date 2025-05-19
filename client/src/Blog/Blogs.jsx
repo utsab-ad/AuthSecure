@@ -21,14 +21,14 @@ const Blogs = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5050/blogs")
+      .get(`${import.meta.env.VITE_API_BASE_URL}/blogs`)
       .then((result) => setBlogs(result.data))
       .catch((err) => console.error(err));
   }, []);
 
   const handleDelete = (blogId) => {
     axios
-      .delete(`http://localhost:5050/blog/api/delete-blog/${blogId}`)
+      .delete(`${import.meta.env.VITE_API_BASE_URL}/blog/api/delete-blog/${blogId}`)
       .then(() => navigate(RouteBlogs))
       .catch((err) => console.error(err));
   };

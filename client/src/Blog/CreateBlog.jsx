@@ -17,7 +17,7 @@ const CreateBlog = () => {
   const Submit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:5050/blog/api/create-blog", {
+      .post(`${import.meta.env.VITE_API_BASE_URL}/blog/api/create-blog`, {
         title,
         slug,
         author,

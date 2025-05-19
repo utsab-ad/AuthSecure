@@ -24,7 +24,7 @@ const BlogDetail = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5050/blog/api/get-blog/" + blogid)
+        .get(`${import.meta.env.VITE_API_BASE_URL}/blog/api/get-blog/` + blogid)
       .then((result) => {
         setTitle(result.data.title);
         setSlug(result.data.slug);
