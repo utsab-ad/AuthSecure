@@ -66,7 +66,6 @@ const BlogDetail = () => {
 
   return (
     <main className="w-full px-4 md:px-12 py-8 max-w-6xl mx-auto">
-      {/* Title */}
       <header className="mb-8 text-center">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-indigo-600 leading-tight">
           {title}
@@ -76,7 +75,6 @@ const BlogDetail = () => {
         </p>
       </header>
 
-      {/* Controls */}
       <div className="flex justify-end gap-2 mb-4">
         <Button
           onClick={handleShare}
@@ -97,7 +95,6 @@ const BlogDetail = () => {
         )}
       </div>
 
-      {/* Metadata */}
       <div className="mb-6 text-sm md:text-base text-gray-600 dark:text-gray-400">
         <p>
           <span className="font-semibold">Author:</span> {author}
@@ -110,7 +107,6 @@ const BlogDetail = () => {
         </p>
       </div>
 
-      {/* Content */}
       <article
         className="blog-content prose prose-lg dark:prose-invert max-w-none"
         dangerouslySetInnerHTML={{

@@ -44,7 +44,7 @@ const UpdateBlog = () => {
 
   return (
     <div className="w-full p-2 mt-4">
-      <Card className="md:w-screen max-w-3xl mx-auto bg-gradient-to-br from-white to-white border-1 border-black dark:border-white dark:from-gray-900 dark:via-slate-900 dark:to-gray-950 text-gray-800 dark:text-white shadow-lg shadow-lg border border-gray-300 p-4 rounded-xl transition-shadow hover:shadow-xl">
+      <Card className="md:w-screen max-w-3xl mx-auto bg-gradient-to-br from-white to-white border-1 border-black dark:border-white dark:from-gray-900 dark:via-slate-900 dark:to-gray-950 text-gray-800 dark:text-white shadow-lg shadow-lg border border-gray-300 md:p-4 rounded-xl transition-shadow hover:shadow-xl">
         <CardHeader />
         <CardHeader>
           <CardTitle className="flex justify-center items-center">
@@ -53,7 +53,7 @@ const UpdateBlog = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={Update}>
-            <div className="flex flex-wrap p-2 items-center">
+            <div className="flex flex-wrap md:p-2 items-center">
               <label className="text-sm" htmlFor="title">
                 Title:
               </label>
@@ -68,7 +68,7 @@ const UpdateBlog = () => {
               />
             </div>
 
-            <div className="flex flex-wrap p-2 items-center">
+            <div className="flex flex-wrap md:p-2 items-center">
               <label className="text-sm" htmlFor="slug">
                 Slug:
               </label>
@@ -82,7 +82,7 @@ const UpdateBlog = () => {
                 onChange={(e) => setSlug(e.target.value)}
               />
             </div>
-            <div className="flex flex-wrap p-2 items-center">
+            <div className="flex flex-wrap md:p-2 items-center">
               <label className="text-sm" htmlFor="slug">
                 Author:
               </label>
@@ -97,12 +97,12 @@ const UpdateBlog = () => {
               />
             </div>
 
-            <div className="flex flex-wrap p-2 items-center">
+            <div className="flex flex-wrap p-0 md:p-2 items-center">
               <label className="text-sm" htmlFor="content">
                 Content:
               </label>
 
-             <div id="content"  className="w-full px-2 rounded bg-gray-100  text-black">
+             <div id="content"  className="w-full px-0 md:px-2 rounded bg-gray-100  text-black">
                <JoditEditor
                 ref={editor}
                 value={content}
