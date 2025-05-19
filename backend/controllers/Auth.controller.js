@@ -3,37 +3,6 @@ import User from "../models/User.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const Signup = async (req, res, next) => {
-  try {
-    const { name, contact, email, password } = req.body;
-    // console.log("Register Request:", req.body);
-    const checkuser = await User.findOne({ email });
-    if (checkuser) {
-      return next(handleError(409, "User already registered"));
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // console.log('Hashed password:', hashedPassword);
-
-    const user = new User({
-      name,
-      contact,
-      email,
-      password: hashedPassword,
-    });
-
-    await user.save();
-    res.status(201).json({
-      success: true,
-      message: "Regestration Successfull",
-    });
-  } catch (error) {
-    // console.error("Error during registration:", error);
-    next(handleError(500, error.message));
-  }
-};
-
 export const Login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -68,6 +37,7 @@ export const Login = async (req, res, next) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
       path: "/",
+      maxAge: 1000 * 60,
     });
 
     const newUser = user.toObject({ getters: true });
@@ -84,20 +54,3 @@ export const Login = async (req, res, next) => {
   }
 };
 
-export const Logout = async (req, res, next) => {
-  try {
-    res.clearCookie("access_token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-      path: "/",
-    });
-
-    res.status(200).json({
-      success: true,
-      message: "Logged out successfully",
-    });
-  } catch (error) {
-    next(handleError(500, error.message));
-  }
-};

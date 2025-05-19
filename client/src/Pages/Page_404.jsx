@@ -8,7 +8,7 @@ const Page_404 = () => {
 
     <div className='w-full px-5 h-full flex flex-col  items-left'>
 
-      <p className='text-sm font-semibold text-gray-200'>Authentication</p>
+      <p className='text-sm font-semibold text-gray-200'>Utsab's Portfolio</p>
 
     <h2 className='text-3xl font-bold '>404 Page Not Found</h2>
     <p>Oops! The page you're looking for doesn't exist or has been moved.</p>

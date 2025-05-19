@@ -5,6 +5,8 @@ import AuthRoute from "./routes/Auth.route.js";
 import mongoose from "mongoose";
 import UserRoute from "./routes/User.route.js";
 import cookieParser from "cookie-parser";
+import BlogRoute from "./routes/Blog.route.js";
+import { findBlog } from "./controllers/Blog.controller.js";
 
 dotenv.config();
 
@@ -25,10 +27,23 @@ app.use(cookieParser());
 app.use('/auth', AuthRoute);
 app.use('/in', UserRoute);
 
+app.use("/blog/api", BlogRoute);
+app.get("/blogs", findBlog)
+
 mongoose.connect(process.env.MONGODB_URL, {dbName: 'data-base'})
 .then(() => console.log("mongodb connected"))
 .catch(err => console.log("!! DATABASE WARN !!", err));
 
 app.listen(PORT, (req, res) => {
     console.log(`Server is running on ${PORT}`);
+})
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500 
+  const message = err.message || 500
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message
+  })
 })
