@@ -8,9 +8,7 @@ import React, { useEffect } from "react";
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-100 to-white dark:from-gray-900 dark:via-slate-800 dark:to-gray-950 text-gray-800 dark:text-white font-sans transition-colors duration-500">
-      {/* Main Container */}
       <div className="max-w-7xl mx-auto px-4 py-16 flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
-        {/* Text Section */}
         <div className="w-full lg:w-1/2 text-center lg:text-left">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-700 leading-tight mb-4">
             Hi, I'm Utsab 👋
@@ -38,10 +36,9 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Image Section */}
         <div className="w-full lg:w-1/2 flex justify-center">
           <img
-            src="https://github.com/shadcn.png" // Replace with your image in public folder
+            src="https://github.com/shadcn.png" 
             alt="Utsab's Profile"
             className="w-72 h-72 rounded-full object-cover border-4 border-blue-300 shadow-lg transition duration-300 hover:scale-105"
           />

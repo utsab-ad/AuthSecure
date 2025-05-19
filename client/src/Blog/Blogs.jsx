@@ -73,12 +73,12 @@ const Blogs = () => {
                 {blog.slug}
               </p>
 
-              <Link
-                to={RouteBlogDetail(blog._id)}
-                className="inline-block text-indigo-600 text-sm font-medium hover:underline"
-              >
-                Read full blog →
-              </Link>
+             <Link
+                    to={RouteBlogDetail(blog._id)}
+                    className="inline-block w-fit text-sm font-medium text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                  >
+                    Read full blog →
+                  </Link>
             </div>
 
             <div className="flex justify-between items-center p-4 border-t border-gray-100">
