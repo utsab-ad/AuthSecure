@@ -14,7 +14,7 @@ const LatestBlog = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5050/blog/api/get-latest-blog")
+      .get(`${import.meta.env.VITE_API_BASE_URL}/blog/api/get-latest-blog`)
       .then((result) => {
         setBlogid(result.data._id);
         setTitle(result.data.title);
