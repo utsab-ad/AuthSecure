@@ -7,6 +7,7 @@ import {
 } from "../helper/RouteNames.js";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { Button } from "@/components/ui/button";
 import moment from "moment";
 import { HiPencilAlt } from "react-icons/hi";
@@ -21,16 +22,14 @@ const Blogs = () => {
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_API_BASE_URL}/blogs`)
-      .then((res) => setBlogs(res.data))
+      .then((result) => setBlogs(result.data))
       .catch((err) => console.error(err));
   }, []);
 
   const handleDelete = (blogId) => {
     axios
       .delete(`${import.meta.env.VITE_API_BASE_URL}/blog/api/delete-blog/${blogId}`)
-      .then(() => {
-        setBlogs((prev) => prev.filter((blog) => blog._id !== blogId));
-      })
+      .then(() => navigate(RouteBlogs))
       .catch((err) => console.error(err));
   };
 
@@ -46,7 +45,6 @@ const Blogs = () => {
           </Link>
         </div>
       )}
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogs.map((blog) => (
           <div
