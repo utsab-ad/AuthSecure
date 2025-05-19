@@ -40,56 +40,56 @@ const BlogDetail = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div className="max-w-3xl mx-auto w-full my-8 px-4">
-      <div className="bg-white dark:bg-[#111827] dark:text-white shadow-md border border-gray-200 rounded-2xl p-6 transition-shadow hover:shadow-xl">
-        <header className="mb-3">
-          <h1 className="text-center text-3xl font-bold text-gray-900 dark:text-indigo-700 leading-tight">
-            {title}
-          </h1>
-          <p className="text-center text-sm text-gray-500 dark:text-indigo-500 mt-1">
-            {slug}
-          </p>
-        </header>
-        <div className="flex justify-between items-center pb-1 mb-1 w-full ">
-          <Link>
+      <main className="w-full px-4 md:px-12 py-8 max-w-6xl mx-auto">
+      {/* Title */}
+      <header className="mb-8 text-center">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-indigo-600 leading-tight">
+          {title}
+        </h1>
+        <p className="text-sm text-gray-500 dark:text-indigo-400 mt-2">{slug}</p>
+      </header>
+
+      {/* Controls */}
+      <div className="flex justify-end gap-2 mb-4">
+        <Button
+          variant="outline"
+          className="p-2 hover:bg-gray-100 transition dark:hover:text-black"
+        >
+          <FaShareAlt className="text-lg" />
+        </Button>
+        {user && user.isLoggedIn && (
+          <Link to={RouteEditBlog(blogid)}>
             <Button
               variant="outline"
               className="p-2 hover:bg-gray-100 transition dark:hover:text-black"
             >
-              <FaShareAlt className="text-lg" />
+              <HiPencilAlt className="text-lg" />
             </Button>
           </Link>
-          {user && user.isLoggedIn ? (
-            <>
-              <Link to={RouteEditBlog(blogid)}>
-                <Button
-                  variant="outline"
-                  className="p-2 hover:bg-gray-100 transition dark:hover:text-black"
-                >
-                  <HiPencilAlt className="text-lg" />
-                </Button>
-              </Link>
-            </>
-          ) : (
-            <></>
-          )}
-        </div>
-
-        <div className="flex w-full flex-col md:px-4 text-sm text-gray-600 dark:text-gray-400">
-          <p>Title: {title}</p>
-          <p>Author: {author} </p>
-          <p>Created At: {createdDate}</p>
-          <p>Updated At: {updatedDate}</p>
-        </div>
-
-        <article
-          className="blog-content border-t border-stone-300 dark:text-white text-gray-700"
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(content),
-          }}
-        />
+        )}
       </div>
-    </div>
+
+      {/* Metadata */}
+      <div className="mb-6 text-sm md:text-base text-gray-600 dark:text-gray-400">
+        <p>
+          <span className="font-semibold">Author:</span> {author}
+        </p>
+        <p>
+          <span className="font-semibold">Created At:</span> {createdDate}
+        </p>
+        <p>
+          <span className="font-semibold">Updated At:</span> {updatedDate}
+        </p>
+      </div>
+
+      {/* Content */}
+      <article
+        className="blog-content prose prose-lg dark:prose-invert max-w-none"
+        dangerouslySetInnerHTML={{
+          __html: DOMPurify.sanitize(content),
+        }}
+      />
+    </main>
   );
 };
 

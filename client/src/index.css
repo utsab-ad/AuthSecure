@@ -233,14 +233,21 @@
 }
 
 /* Responsive Text */
-@media (max-width: 768px) {
-  .blog-content h1 { font-size: 1.875rem; }
-  .blog-content h2 { font-size: 1.5rem; }
-  .blog-content h3 { font-size: 1.25rem; }
-  .blog-content h4 { font-size: 1.125rem; }
-  .blog-content h5 { font-size: 1rem; }
-  .blog-content h6 { font-size: 0.95rem; }
+@media (max-width: 640px) {
+  .blog-content {
+    padding: 0 ;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .blog-content h1 { font-size: 1.5rem; }
+  .blog-content h2 { font-size: 1.25rem; }
+  .blog-content h3 { font-size: 1.125rem; }
+  .blog-content h4 { font-size: 1rem; }
+  .blog-content h5 { font-size: 0.95rem; }
+  .blog-content h6 { font-size: 0.9rem; }
 }
+
 
 /* Add spacing between sections */
 .blog-content > *:not(:last-child) {
