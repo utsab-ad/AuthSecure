@@ -7,6 +7,8 @@ import UserRoute from "./routes/User.route.js";
 import cookieParser from "cookie-parser";
 import BlogRoute from "./routes/Blog.route.js";
 import { findBlog } from "./controllers/Blog.controller.js";
+import OtpRoute from "./routes/Otp.routes.js";
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 
@@ -26,6 +28,8 @@ app.use(cookieParser());
 
 app.use('/auth', AuthRoute);
 app.use('/in', UserRoute);
+app.use("/otp", OtpRoute);
+
 
 app.use("/blog/api", BlogRoute);
 app.get("/blogs", findBlog)
