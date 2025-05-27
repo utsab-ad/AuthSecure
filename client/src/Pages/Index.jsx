@@ -3,9 +3,15 @@ import GitHubActivity from "@/Components/GitHubActivity";
 import Languages from "@/Components/Languages";
 import LatestBlog from "@/Components/LatestBlog";
 import ProjectIndex from "@/Components/ProjectsIndex";
+import { RouteLogin } from "@/helper/RouteNames";
+import axios from "axios";
 import React, { useEffect } from "react";
+import { LuLogOut } from "react-icons/lu";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-100 to-white dark:from-gray-900 dark:via-slate-800 dark:to-gray-950 text-gray-800 dark:text-white font-sans transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 py-16 flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
@@ -38,7 +44,7 @@ const Index = () => {
 
         <div className="w-full lg:w-1/2 flex justify-center">
           <img
-            src="https://github.com/shadcn.png" 
+            src="https://github.com/shadcn.png"
             alt="Utsab's Profile"
             className="w-72 h-72 rounded-full object-cover border-4 border-blue-300 shadow-lg transition duration-300 hover:scale-105"
           />
@@ -54,7 +60,7 @@ const Index = () => {
       </div>
 
       <div id="projects" className="mx-2 my-3">
-        <ProjectIndex/>
+        <ProjectIndex />
       </div>
 
       <div className="flex flex-col justify-center items-center p-2 md:block hidden">

@@ -1,6 +1,6 @@
 import BackNavigation from "@/Buttons/BackNavigation";
 import HomeNavigation from "@/Buttons/HomeNavigation";
-import {RouteIndex} from "@/helper/RouteNames";
+import {RouteIndex, RouteLoginVerify} from "@/helper/RouteNames";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,16 +24,9 @@ const Login = () => {
         { withCredentials: true }
       )
       .then((res) => {
-        const user = res.data?.user || res.data;
-
-        dispatch(setUser(user));
-        confirm("Utsab Adhikari");
-        navigate(RouteIndex);
+        navigate(RouteLoginVerify, { state: { email, password } });
       })
-      .catch((err) => {
-        alert("You are not the Admin " + email);
-        console.log(err)
-      });
+      .catch((err) => console.log(err));
   };
 
   return (

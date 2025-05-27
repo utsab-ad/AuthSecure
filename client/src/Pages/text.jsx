@@ -25,7 +25,7 @@ import { SiFramework } from "react-icons/si";
 import { FaWhatsapp } from "react-icons/fa6";
 import { HiOutlinePhoneMissedCall } from "react-icons/hi";
 import { MdMailOutline } from "react-icons/md";
-import Footer from "@/Components/Footer";
+import Footer from "@/helper/Components/Footer";
 import { RouteBlogs, RouteIndex } from "@/helper/RouteNames";
 import { useSelector } from "react-redux";
 

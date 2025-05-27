@@ -10,6 +10,7 @@ import {
   RouteHome,
   RouteIndex,
   RouteLogin,
+  RouteLoginVerify,
   RouteSignup,
 } from "./helper/RouteNames.js";
 import Index from "./Pages/Index";
@@ -22,6 +23,7 @@ import CreateBlog from "./Blog/CreateBlog";
 import Blogs from "./Blog/Blogs";
 import BlogDetail from "./Blog/BlogDetail";
 import UpdateBlog from "./Blog/UpdateBlog";
+import LoginVerify from "./Pages/LoginVerify";
 
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
         <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
         </Route>
         <Route path={RouteLogin} element={<Login />}></Route>
+        <Route path={RouteLoginVerify} element={<LoginVerify />}></Route>
         <Route path="*" element={<Page_404 />}></Route>
       </Routes>
     </BrowserRouter>
