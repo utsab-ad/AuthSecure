@@ -54,3 +54,22 @@ export const Login = async (req, res) => {
   }
 };
 
+export const Logout = (req, res) => {
+  try {
+    res.clearCookie("jwt", {
+      httpsOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
+    res.status(200).json({
+      success: true,
+      message: "Logged Out successfully"
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error ",
+    });
+    console.log(error);
+  }
+};
