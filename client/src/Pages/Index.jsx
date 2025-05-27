@@ -3,14 +3,16 @@ import GitHubActivity from "@/Components/GitHubActivity";
 import Languages from "@/Components/Languages";
 import LatestBlog from "@/Components/LatestBlog";
 import ProjectIndex from "@/Components/ProjectsIndex";
-import { RouteLogin } from "@/helper/RouteNames";
+import { RouteIntern, RouteLandingPageForm, RouteLogin } from "@/helper/RouteNames";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LuLogOut } from "react-icons/lu";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const [showHireModal, setShowHireModal] = useState(false);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-100 to-white dark:from-gray-900 dark:via-slate-800 dark:to-gray-950 text-gray-800 dark:text-white font-sans transition-colors duration-500">
@@ -27,18 +29,79 @@ const Index = () => {
             management.
           </p>
           <div className="flex ttems-center justify-evenly gap-3">
-            <a
-              href="#projects"
+            <button
+              onClick={() => setShowHireModal(true)}
               className="inline-block bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-indigo-700 hover:to-purple-600 text-white font-semibold py-3 px-2 md:px-6 rounded-lg shadow-lg transition duration-300"
             >
               Hire Me
-            </a>
-            <a
-              href="#projects"
+            </button>
+            {showHireModal && (
+              <div className="fixed inset-0 bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
+                <div className="bg-white p-6 rounded-xl shadow-lg w-80 text-center space-y-4">
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    Choose an Option
+                  </h3>
+                  <div className="flex flex-col gap-4">
+                    <Link
+                      to={RouteIntern}
+                      className="cursor-pointer bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600"
+                    >
+                      Intern
+                    </Link>
+                    <button className="cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+                      Job
+                    </button>
+                    <button className="cursor-pointer bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600">
+                      Remote
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => setShowHireModal(false)}
+                    className="text-red-500  py-2 rounded-lg hover:text-red-600 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
+            <button
+              onClick={() => setShowCreateModal(true)}
               className="inline-block border-2 border-indigo-500 text-indigo-700 hover:text-white hover:bg-indigo-500 font-semibold py-3 px-2 md:px-6 rounded-lg shadow-lg transition duration-300"
             >
               Lets Create
-            </a>
+            </button>
+
+            {showCreateModal && (
+              <div className="fixed inset-0 bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
+                <div className="bg-white p-6 rounded-xl shadow-lg w-80 text-center space-y-4">
+                  <h3 className="text-xl font-semibold text-gray-800">
+                    Choose an Option
+                  </h3>
+                  <div className="flex flex-col gap-4">
+                    <Link
+                   to={RouteLandingPageForm} 
+                    className="cursor-pointer bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600">
+                      Landing Page
+                    </Link>
+                    <button className="cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+                      Portfolio
+                    </button>
+                    <button className="cursor-pointer bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600">
+                      Business Site
+                    </button>
+                    <button className="cursor-pointer bg-stone-500 text-white py-2 rounded-lg hover:bg-stone-600">
+                      E - Commerce
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => setShowCreateModal(false)}
+                    className="text-red-500  py-2 rounded-lg hover:text-red-600 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

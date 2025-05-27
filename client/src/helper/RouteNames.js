@@ -27,3 +27,6 @@ export const RouteBlogDetail = (blogid) => {
 }
 
 export const RouteDeleteBlog = "/blog/delete/:id"
+
+export const RouteIntern = "/hireme/intern"
+export const RouteLandingPageForm = "/create/landingpg"

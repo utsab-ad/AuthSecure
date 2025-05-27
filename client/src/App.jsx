@@ -9,6 +9,8 @@ import {
   RouteEditBlog,
   RouteHome,
   RouteIndex,
+  RouteIntern,
+  RouteLandingPageForm,
   RouteLogin,
   RouteLoginVerify,
   RouteSignup,
@@ -24,6 +26,8 @@ import Blogs from "./Blog/Blogs";
 import BlogDetail from "./Blog/BlogDetail";
 import UpdateBlog from "./Blog/UpdateBlog";
 import LoginVerify from "./Pages/LoginVerify";
+import Intern from "./Pages/Hireme/Intern";
+import LandingPageForm from "./Pages/Create/LandingPageForm";
 
 
 function App() {
@@ -39,6 +43,8 @@ function App() {
           </Route>
             <Route path={RouteBlogs} element={<Blogs />}></Route>
         <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
+        <Route path={RouteIntern} element={<Intern />}></Route>
+        <Route path={RouteLandingPageForm} element={<LandingPageForm />}></Route>
         </Route>
         <Route path={RouteLogin} element={<Login />}></Route>
         <Route path={RouteLoginVerify} element={<LoginVerify />}></Route>
