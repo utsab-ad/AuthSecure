@@ -11,7 +11,7 @@ const LandingPageForm = () => {
     objective: "",
     features: "",
     deadline: "",
-    budget: ""
+    budget: "",
   });
 
   const handleChange = (e) => {
@@ -32,14 +32,17 @@ const LandingPageForm = () => {
           Landing Page Request Form
         </h2>
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           <input
             type="text"
             name="name"
             placeholder="Full Name"
             value={formData.name}
             onChange={handleChange}
-            className="form-input"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
             required
           />
 
@@ -49,7 +52,7 @@ const LandingPageForm = () => {
             placeholder="Contact Number"
             value={formData.contact}
             onChange={handleChange}
-            className="form-input"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
             required
           />
 
@@ -59,7 +62,7 @@ const LandingPageForm = () => {
             placeholder="Email Address"
             value={formData.email}
             onChange={handleChange}
-            className="form-input"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
             required
           />
 
@@ -69,7 +72,7 @@ const LandingPageForm = () => {
             placeholder="Company Name (Optional)"
             value={formData.company}
             onChange={handleChange}
-            className="form-input"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
           />
 
           <div className="md:col-span-2">
@@ -78,7 +81,7 @@ const LandingPageForm = () => {
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="form-input"
+              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
               required
             >
               <option value="">Select a category</option>
@@ -91,33 +94,39 @@ const LandingPageForm = () => {
             </select>
           </div>
 
-          <textarea
-            name="description"
-            placeholder="Brief description about the landing page goals and expectations"
-            value={formData.description}
-            onChange={handleChange}
-            className="form-textarea md:col-span-2"
-            rows="4"
-            required
-          />
+          <div className="sm:col-span-2">
+            <textarea
+              name="description"
+              placeholder="Brief description about the landing page goals and expectations"
+              value={formData.description}
+              onChange={handleChange}
+              rows="4"
+              className="w-full p-3 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+              required
+            />
+          </div>
 
-          <textarea
-            name="objective"
-            placeholder="Main objective of the page (CTA, conversion, info)"
-            value={formData.objective}
-            onChange={handleChange}
-            className="form-textarea md:col-span-2"
-            rows="3"
-          />
+          <div className="sm:col-span-2">
+            <textarea
+              name="objective"
+              placeholder="Main objective of the page (CTA, conversion, info)"
+              value={formData.objective}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+              rows="3"
+            />
+          </div>
 
-          <textarea
-            name="features"
-            placeholder="Specific features you want (e.g. testimonials, gallery)"
-            value={formData.features}
-            onChange={handleChange}
-            className="form-textarea md:col-span-2"
-            rows="3"
-          />
+          <div className="sm:col-span-2">
+            <textarea
+              name="features"
+              placeholder="Specific features you want (e.g. testimonials, gallery)"
+              value={formData.features}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+              rows="3"
+            />
+          </div>
 
           <input
             type="text"
@@ -125,7 +134,7 @@ const LandingPageForm = () => {
             placeholder="Preferred deadline (e.g. 15 June 2025)"
             value={formData.deadline}
             onChange={handleChange}
-            className="form-input md:col-span-2"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
           />
 
           <input
@@ -134,15 +143,15 @@ const LandingPageForm = () => {
             placeholder="Budget range (e.g. $100 - $300)"
             value={formData.budget}
             onChange={handleChange}
-            className="form-input md:col-span-2"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
           />
 
-          <div className="md:col-span-2">
+          <div className="sm:col-span-2">
             <button
               type="submit"
-              className="bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-200 w-full"
+              className="cursor-pointer w-full bg-indigo-600 text-white py-3 rounded font-medium hover:bg-indigo-700 transition duration-200 text-sm sm:text-base"
             >
-              Submit Request
+              Submit Application
             </button>
           </div>
         </form>

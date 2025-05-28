@@ -147,7 +147,7 @@ const Intern = () => {
           <div className="sm:col-span-2">
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-3 rounded font-medium hover:bg-indigo-700 transition duration-200 text-sm sm:text-base"
+              className="cursor-pointer w-full bg-indigo-600 text-white py-3 rounded font-medium hover:bg-indigo-700 transition duration-200 text-sm sm:text-base"
             >
               Submit Application
             </button>

@@ -39,7 +39,8 @@ const PortfolioPageForm = () => {
             placeholder="Full Name"
             value={formData.name}
             onChange={handleChange}
-            className="form-input"
+                      className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
             required
           />
 
@@ -49,7 +50,8 @@ const PortfolioPageForm = () => {
             placeholder="Contact Number"
             value={formData.contact}
             onChange={handleChange}
-            className="form-input"
+                      className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
             required
           />
 
@@ -59,7 +61,8 @@ const PortfolioPageForm = () => {
             placeholder="Email Address"
             value={formData.email}
             onChange={handleChange}
-            className="form-input"
+                        className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
             required
           />
 
@@ -69,29 +72,36 @@ const PortfolioPageForm = () => {
             placeholder="Your Profession (e.g., Web Developer)"
             value={formData.profession}
             onChange={handleChange}
-            className="form-input"
+                        className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
             required
           />
 
+          <div className="sm:col-span-2">
           <textarea
             name="goals"
             placeholder="What do you want to achieve with your portfolio?"
             value={formData.goals}
             onChange={handleChange}
-            className="form-textarea md:col-span-2"
+                          className="w-full p-3 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
             rows="3"
             required
           />
+          </div>
 
+          <div className="sm:col-span-2">
           <textarea
             name="sections"
             placeholder="Sections you want included (e.g. projects, resume, contact form, testimonials)"
             value={formData.sections}
             onChange={handleChange}
-            className="form-textarea md:col-span-2"
+                          className="w-full p-3 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
             rows="3"
             required
           />
+          </div>
 
           <input
             type="text"
@@ -99,17 +109,21 @@ const PortfolioPageForm = () => {
             placeholder="Preferred theme or color style (Optional)"
             value={formData.theme}
             onChange={handleChange}
-            className="form-input md:col-span-2"
+                       className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
           />
 
+          <div className="sm:col-span-2">
           <textarea
             name="links"
             placeholder="Any existing links (GitHub, LinkedIn, Resume, etc.)"
             value={formData.links}
             onChange={handleChange}
-            className="form-textarea md:col-span-2"
+                         className="w-full p-3 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
             rows="3"
           />
+          </div>
 
           <input
             type="text"
@@ -117,7 +131,8 @@ const PortfolioPageForm = () => {
             placeholder="Preferred deadline (e.g., 20 June 2025)"
             value={formData.deadline}
             onChange={handleChange}
-            className="form-input md:col-span-2"
+                       className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
           />
 
           <input
@@ -126,15 +141,16 @@ const PortfolioPageForm = () => {
             placeholder="Estimated budget (e.g., $50 - $150)"
             value={formData.budget}
             onChange={handleChange}
-            className="form-input md:col-span-2"
+                       className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+
           />
 
-          <div className="md:col-span-2">
+          <div className="sm:col-span-2">
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-200"
+              className="cursor-pointer w-full bg-indigo-600 text-white py-3 rounded font-medium hover:bg-indigo-700 transition duration-200 text-sm sm:text-base"
             >
-              Submit Request
+              Submit Application
             </button>
           </div>
         </form>
