@@ -21,7 +21,6 @@ import Login from "./Pages/Login";
 import HomePage from "./Pages/HomePage";
 import Page_404 from "./Pages/Page_404";
 import AuthRouteProtection from "./Components/AuthRouteProtection";
-import Sidebar from "./Pages/Sidebar";
 import CreateBlog from "./Blog/CreateBlog";
 import Blogs from "./Blog/Blogs";
 import BlogDetail from "./Blog/BlogDetail";
@@ -30,6 +29,7 @@ import LoginVerify from "./Pages/LoginVerify";
 import Intern from "./Pages/Hireme/Intern";
 import LandingPageForm from "./Pages/Create/LandingPageForm";
 import PortfolioPageForm from "./Pages/Create/PortfolioForm";
+import Sidebar from "./components/ui/Sidebar/Sidebar";
 
 
 function App() {
