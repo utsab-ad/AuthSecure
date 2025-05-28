@@ -3,7 +3,7 @@ import GitHubActivity from "@/Components/GitHubActivity";
 import Languages from "@/Components/Languages";
 import LatestBlog from "@/Components/LatestBlog";
 import ProjectIndex from "@/Components/ProjectsIndex";
-import { RouteIntern, RouteLandingPageForm, RouteLogin } from "@/helper/RouteNames";
+import { RouteIntern, RouteLandingPageForm, RouteLogin, RoutePortfolioPageForm } from "@/helper/RouteNames";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { LuLogOut } from "react-icons/lu";
@@ -83,9 +83,11 @@ const Index = () => {
                     className="cursor-pointer bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600">
                       Landing Page
                     </Link>
-                    <button className="cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+                    <Link
+                    to={RoutePortfolioPageForm}
+                    className="cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
                       Portfolio
-                    </button>
+                    </Link>
                     <button className="cursor-pointer bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600">
                       Business Site
                     </button>

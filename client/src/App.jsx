@@ -13,6 +13,7 @@ import {
   RouteLandingPageForm,
   RouteLogin,
   RouteLoginVerify,
+  RoutePortfolioPageForm,
   RouteSignup,
 } from "./helper/RouteNames.js";
 import Index from "./Pages/Index";
@@ -28,6 +29,7 @@ import UpdateBlog from "./Blog/UpdateBlog";
 import LoginVerify from "./Pages/LoginVerify";
 import Intern from "./Pages/Hireme/Intern";
 import LandingPageForm from "./Pages/Create/LandingPageForm";
+import PortfolioPageForm from "./Pages/Create/PortfolioForm";
 
 
 function App() {
@@ -45,6 +47,7 @@ function App() {
         <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
         <Route path={RouteIntern} element={<Intern />}></Route>
         <Route path={RouteLandingPageForm} element={<LandingPageForm />}></Route>
+        <Route path={RoutePortfolioPageForm} element={<PortfolioPageForm />}></Route>
         </Route>
         <Route path={RouteLogin} element={<Login />}></Route>
         <Route path={RouteLoginVerify} element={<LoginVerify />}></Route>

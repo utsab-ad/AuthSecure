@@ -30,3 +30,4 @@ export const RouteDeleteBlog = "/blog/delete/:id"
 
 export const RouteIntern = "/hireme/intern"
 export const RouteLandingPageForm = "/create/landingpg"
+export const RoutePortfolioPageForm = "/create/portfolio"

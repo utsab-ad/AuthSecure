@@ -21,19 +21,24 @@ const Intern = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
-    // Post to backend if required
+    // Send to backend if needed
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-3xl">
-        <h2 className="text-3xl font-extrabold text-indigo-700 mb-6 text-center">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
+      <div className="w-full max-w-4xl">
+        <h2
+          className="text-center font-bold text-indigo-700 mb-6"
+          style={{
+            fontSize: "clamp(1.75rem, 5vw, 2.5rem)",
+          }}
+        >
           Internship Offer Form
         </h2>
 
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
         >
           <input
             type="text"
@@ -41,7 +46,7 @@ const Intern = () => {
             placeholder="Company Name"
             value={formData.companyName}
             onChange={handleChange}
-            className="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
             required
           />
 
@@ -51,7 +56,7 @@ const Intern = () => {
             placeholder="Address"
             value={formData.address}
             onChange={handleChange}
-            className="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
             required
           />
 
@@ -61,7 +66,7 @@ const Intern = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
             required
           />
 
@@ -71,7 +76,7 @@ const Intern = () => {
             placeholder="Contact Number"
             value={formData.contact}
             onChange={handleChange}
-            className="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
             required
           />
 
@@ -81,31 +86,34 @@ const Intern = () => {
             placeholder="Number of Employees"
             value={formData.noOfEmployees}
             onChange={handleChange}
-            className="px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
             required
           />
 
-          <div className="md:col-span-2">
+          <div className="sm:col-span-2">
             <textarea
               name="description"
               placeholder="Company Description"
               value={formData.description}
               onChange={handleChange}
-              className="w-full px-4 py-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400"
               rows="4"
+              className="w-full p-3 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
               required
             />
           </div>
 
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+          <div className="sm:col-span-2">
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              style={{ fontSize: "clamp(0.9rem, 2vw, 1rem)" }}
+            >
               How did you find me?
             </label>
             <select
               name="source"
               value={formData.source}
               onChange={handleChange}
-              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
               required
             >
               <option value="">Select an option</option>
@@ -116,11 +124,17 @@ const Intern = () => {
             </select>
           </div>
 
-          <div className="md:col-span-2 bg-indigo-50 border-l-4 border-indigo-400 p-5 rounded-xl">
-            <h3 className="text-xl font-semibold text-indigo-600 mb-2">
+          <div className="sm:col-span-2 bg-indigo-100 p-4 border-l-4 border-indigo-500">
+            <h3
+              className="font-semibold text-indigo-700 mb-2"
+              style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.5rem)" }}
+            >
               Why you should hire me?
             </h3>
-            <p className="text-gray-700">
+            <p
+              className="text-gray-800"
+              style={{ fontSize: "clamp(0.9rem, 2vw, 1.1rem)" }}
+            >
               I bring a solid foundation in full-stack development, driven by a
               desire for continual growth and excellence. With a proactive
               approach, adaptability to new challenges, and clear communication
@@ -130,10 +144,10 @@ const Intern = () => {
             </p>
           </div>
 
-          <div className="md:col-span-2">
+          <div className="sm:col-span-2">
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-200"
+              className="w-full bg-indigo-600 text-white py-3 rounded font-medium hover:bg-indigo-700 transition duration-200 text-sm sm:text-base"
             >
               Submit Application
             </button>
