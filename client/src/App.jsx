@@ -35,7 +35,6 @@ import HiremeRequestVerify from "./Pages/Hireme/HiremeRequestVerify";
 import HiremeRequests from "./Pages/Hireme/HiremeRequests";
 import TrackApplication from "./Pages/Hireme/TrackApplication";
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -46,13 +45,25 @@ function App() {
             <Route path={RouteCreateBlog} element={<CreateBlog />}></Route>
             <Route path={RouteEditBlog()} element={<UpdateBlog />}></Route>
           </Route>
-            <Route path={RouteBlogs} element={<Blogs />}></Route>
-        <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
-        <Route path={RouteHireme} element={<HiremePage />}></Route>
-        <Route path={RouteTrackApplication} element={<TrackApplication />}></Route>
-        <Route path={RouteHiremeVerify} element={<HiremeRequestVerify />}></Route>
-        <Route path={RouteLandingPageForm} element={<LandingPageForm />}></Route>
-        <Route path={RoutePortfolioPageForm} element={<PortfolioPageForm />}></Route>
+          <Route path={RouteBlogs} element={<Blogs />}></Route>
+          <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
+          <Route path={RouteHireme} element={<HiremePage />}></Route>
+          <Route
+            path={RouteTrackApplication}
+            element={<TrackApplication />}
+          ></Route>
+          <Route
+            path={RouteHiremeVerify}
+            element={<HiremeRequestVerify />}
+          ></Route>
+          <Route
+            path={RouteLandingPageForm}
+            element={<LandingPageForm />}
+          ></Route>
+          <Route
+            path={RoutePortfolioPageForm}
+            element={<PortfolioPageForm />}
+          ></Route>
         </Route>
         <Route path={RouteLogin} element={<Login />}></Route>
         <Route path={RouteLoginVerify} element={<LoginVerify />}></Route>

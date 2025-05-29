@@ -31,7 +31,7 @@ export const htmlHireme = (companyName, otp) => {
         <div style="max-width: 600px; margin: auto; background: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
           <h1 style="color: #2c3e50; text-align: center;">Hello, ${companyName} 👋</h1>
           <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
-          <h2 style="color: #007BFF;">Verify Your Email Address For Login</h2>
+          <h2 style="color: #007BFF;">Verify Your Email Address for Submission</h2>
           <p style="font-size: 16px; color: #333;">
             Thank you for request. For further procedure, please use the following One-Time Password (OTP) to verify your email address:
           </p>
