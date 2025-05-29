@@ -1,9 +1,9 @@
-import FileCounter from "@/Components/FileCounter";
-import GitHubActivity from "@/Components/GitHubActivity";
-import Languages from "@/Components/Languages";
-import LatestBlog from "@/Components/LatestBlog";
-import ProjectIndex from "@/Components/ProjectsIndex";
-import { RouteIntern, RouteLandingPageForm, RouteLogin, RoutePortfolioPageForm } from "@/helper/RouteNames";
+import FileCounter from "@/helpingComponents/FileCounter";
+import GitHubActivity from "@/helpingComponents/GitHubActivity";
+import Languages from "@/helpingComponents/Languages";
+import LatestBlog from "@/helpingComponents/LatestBlog";
+import ProjectIndex from "@/helpingComponents/ProjectsIndex";
+import { RouteHireme, RouteLandingPageForm, RouteLogin, RoutePortfolioPageForm, RouteTrackApplication } from "@/helper/RouteNames";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { LuLogOut } from "react-icons/lu";
@@ -38,22 +38,21 @@ const Index = () => {
             {showHireModal && (
               <div className="fixed inset-0 bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
                 <div className="bg-white p-6 rounded-xl shadow-lg w-80 text-center space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    Choose an Option
+                  <h3 className="text-sn font-semibold text-gray-500">
+                    Continue for offering Intern / Job / Remote / Parttime
                   </h3>
                   <div className="flex flex-col gap-4">
                     <Link
-                      to={RouteIntern}
+                      to={RouteHireme}
                       className="cursor-pointer bg-indigo-500 text-white py-2 rounded-lg hover:bg-indigo-600"
                     >
-                      Intern
+                      Continue
                     </Link>
-                    <button className="cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
-                      Job
-                    </button>
-                    <button className="cursor-pointer bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-600">
-                      Remote
-                    </button>
+                     <Link
+                    to={RouteTrackApplication}
+                    className="cursor-pointer bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+                      Track Your Application
+                    </Link>
                   </div>
                   <button
                     onClick={() => setShowHireModal(false)}

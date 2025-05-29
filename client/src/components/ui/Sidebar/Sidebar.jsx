@@ -19,8 +19,7 @@ import { MdMailOutline } from "react-icons/md";
 import { BsFillPostcardFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import SidebarProfile from "./SidebarProfile";
-import SidebarLanguages from "./SidebarLanguages";
-import Footer from "@/Components/Footer";
+import Footer from "@/helpingComponents/Footer";
 import { RouteBlogs, RouteIndex } from "@/helper/RouteNames";
 import { GrLanguage } from "react-icons/gr";
 

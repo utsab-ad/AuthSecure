@@ -7,29 +7,33 @@ import {
   RouteBlogs,
   RouteCreateBlog,
   RouteEditBlog,
+  RouteHireme,
+  RouteHiremeRequests,
+  RouteHiremeVerify,
   RouteHome,
   RouteIndex,
-  RouteIntern,
   RouteLandingPageForm,
   RouteLogin,
   RouteLoginVerify,
   RoutePortfolioPageForm,
-  RouteSignup,
+  RouteTrackApplication,
 } from "./helper/RouteNames.js";
 import Index from "./Pages/Index";
 import Login from "./Pages/Login";
-import HomePage from "./Pages/HomePage";
 import Page_404 from "./Pages/Page_404";
-import AuthRouteProtection from "./Components/AuthRouteProtection";
+import AuthRouteProtection from "./helpingComponents/AuthRouteProtection";
 import CreateBlog from "./Blog/CreateBlog";
 import Blogs from "./Blog/Blogs";
 import BlogDetail from "./Blog/BlogDetail";
 import UpdateBlog from "./Blog/UpdateBlog";
 import LoginVerify from "./Pages/LoginVerify";
-import Intern from "./Pages/Hireme/Intern";
 import LandingPageForm from "./Pages/Create/LandingPageForm";
 import PortfolioPageForm from "./Pages/Create/PortfolioForm";
 import Sidebar from "./components/ui/Sidebar/Sidebar";
+import HiremePage from "./Pages/Hireme/HiremePage";
+import HiremeRequestVerify from "./Pages/Hireme/HiremeRequestVerify";
+import HiremeRequests from "./Pages/Hireme/HiremeRequests";
+import TrackApplication from "./Pages/Hireme/TrackApplication";
 
 
 function App() {
@@ -39,13 +43,14 @@ function App() {
         <Route path={RouteIndex} element={<Sidebar />}>
           <Route index element={<Index />}></Route>
           <Route element={<AuthRouteProtection />}>
-            <Route path={RouteHome} element={<HomePage />}></Route>
             <Route path={RouteCreateBlog} element={<CreateBlog />}></Route>
             <Route path={RouteEditBlog()} element={<UpdateBlog />}></Route>
           </Route>
             <Route path={RouteBlogs} element={<Blogs />}></Route>
         <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
-        <Route path={RouteIntern} element={<Intern />}></Route>
+        <Route path={RouteHireme} element={<HiremePage />}></Route>
+        <Route path={RouteTrackApplication} element={<TrackApplication />}></Route>
+        <Route path={RouteHiremeVerify} element={<HiremeRequestVerify />}></Route>
         <Route path={RouteLandingPageForm} element={<LandingPageForm />}></Route>
         <Route path={RoutePortfolioPageForm} element={<PortfolioPageForm />}></Route>
         </Route>

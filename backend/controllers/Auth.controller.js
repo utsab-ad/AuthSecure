@@ -2,7 +2,7 @@ import { handleError } from "../helpers/handleError.js";
 import User from "../models/User.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import htmlLogin from "../utils/emailPage.js";
+import { htmlLogin } from "../utils/emailPage.js";
 import sendEmail from "../utils/sendEmail.js";
 import { tempUserStore } from "../utils/tempUserStore.js";
 
@@ -31,20 +31,18 @@ export const Login = async (req, res) => {
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-        const otpExpires = Date.now() + 5 * 60 * 1000; // 5 min
-    
-        const html = htmlLogin(otp);
-    
-        tempUserStore.set(email, { otp, otpExpires });
-    
-        await sendEmail(email, "OTP Verification", html);
-    
-        return res.status(200).json({
-          success: true,
-          message: "OTP sent to email. Verify to Login.",
-        });
+    const otpExpires = Date.now() + 5 * 60 * 1000; // 5 min
 
-    
+    const html = htmlLogin(otp);
+
+    tempUserStore.set(email, { otp, otpExpires });
+
+    await sendEmail(email, "OTP Verification", html);
+
+    return res.status(200).json({
+      success: true,
+      message: "OTP sent to email. Verify to Login.",
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -63,8 +61,8 @@ export const Logout = (req, res) => {
     });
     res.status(200).json({
       success: true,
-      message: "Logged Out successfully"
-    })
+      message: "Logged Out successfully",
+    });
   } catch (error) {
     res.status(500).json({
       success: false,

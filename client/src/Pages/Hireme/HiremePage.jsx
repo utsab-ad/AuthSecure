@@ -1,12 +1,15 @@
-import BackNavigation from "@/Buttons/BackNavigation";
-import HomeNavigation from "@/Buttons/HomeNavigation";
+import { RouteHiremeVerify } from "@/helper/RouteNames";
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Intern = () => {
+const HiremePage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     companyName: "",
     address: "",
     email: "",
+    category: "",
     contact: "",
     noOfEmployees: "",
     description: "",
@@ -20,8 +23,25 @@ const Intern = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // Send to backend if needed
+    axios
+      .post(
+        `${import.meta.env.VITE_API_BASE_URL}/forms/intern`,
+        {
+          companyName: formData.companyName,
+          address: formData.address,
+          category: formData.category,
+          email: formData.email,
+          contact: formData.contact,
+          noOfEmployees: formData.noOfEmployees,
+          description: formData.description,
+          source: formData.source,
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        navigate(RouteHiremeVerify, { state: { email: formData.email }});
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -33,7 +53,7 @@ const Intern = () => {
             fontSize: "clamp(1.75rem, 5vw, 2.5rem)",
           }}
         >
-          Internship Offer Form
+          {formData.category} Offer Form
         </h2>
 
         <form
@@ -79,6 +99,28 @@ const Intern = () => {
             className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
             required
           />
+
+          <div className="sm:col-span-2">
+            <label
+              className="block text-sm font-medium text-gray-700 mb-1"
+              style={{ fontSize: "clamp(0.9rem, 2vw, 1rem)" }}
+            >
+              Select Category
+            </label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
+              required
+            >
+              <option value="">Select an option</option>
+              <option value="Internship">Internship</option>
+              <option value="Job">Job</option>
+              <option value="Remote">Remote</option>
+              <option value="Part Time">Part Time</option>
+            </select>
+          </div>
 
           <input
             type="number"
@@ -158,4 +200,4 @@ const Intern = () => {
   );
 };
 
-export default Intern;
+export default HiremePage;

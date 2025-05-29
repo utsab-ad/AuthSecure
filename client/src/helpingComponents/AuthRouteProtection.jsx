@@ -1,5 +1,5 @@
-import HomePage from '@/Pages/HomePage.jsx'
-import { RouteHome, RouteLogin } from '../helper/RouteNames.js'
+
+import {RouteLogin } from '../helper/RouteNames.js'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Outlet } from 'react-router-dom'
@@ -7,7 +7,8 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 const AuthRouteProtection = () => {
 
-    const user = useSelector(state => state.user)
+    const user = useSelector(state => {
+      state.user})
     if(user && user.isLoggedIn) {
 
   return (
