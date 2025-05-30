@@ -210,7 +210,7 @@ const Sidebar = () => {
 
       <div
         onClick={() => setIsOpen(false)}
-        className="ml-15 md:ml-74 flex-1 bg-gradient-to-br from-gray-50 via-blue-100 to-white dark:from-gray-900 dark:via-slate-800 dark:to-gray-950 text-gray-800 dark:text-white"
+        className="ml-15 flex min-h-[100vh] flex-col md:ml-74 flex-1 bg-gradient-to-br from-gray-50 via-blue-100 to-white dark:from-gray-900 dark:via-slate-800 dark:to-gray-950 text-gray-800 dark:text-white"
       >
         {!isIndexRoute && (
           <button
@@ -219,9 +219,13 @@ const Sidebar = () => {
           >
             <IoMdArrowRoundBack />
           </button>
+        
         )}
-        <Outlet />
+        <div className="flex-grow">
+          <Outlet />
+        </div>
         <Footer />
+    
       </div>
     </div>
   );

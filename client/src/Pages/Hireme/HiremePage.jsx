@@ -63,7 +63,7 @@ const HiremePage = () => {
           <input
             type="text"
             name="companyName"
-            placeholder="Company Name"
+            placeholder="Company Name / Your Name"
             value={formData.companyName}
             onChange={handleChange}
             className="p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm sm:text-base"
