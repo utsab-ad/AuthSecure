@@ -4,10 +4,11 @@ import sendEmail from "../utils/sendEmail.js";
 import { tempRequeststore } from "../utils/tempRequestStore.js";
 import { CreateTokenHireme } from "./Token.controller.js";
 
-
 export const findRequest = async (req, res, next) => {
   try {
-    HiremeReq.find({}).sort({ createdAt: -1 }).exec()
+    HiremeReq.find({})
+      .sort({ createdAt: -1 })
+      .exec()
       .then((requests) => res.json(requests))
       .catch((err) => res.json(err));
   } catch (error) {
@@ -17,7 +18,7 @@ export const findRequest = async (req, res, next) => {
 
 export const getRequest = async (req, res, next) => {
   try {
-    const  requestid = req.params.id;
+    const requestid = req.params.id;
 
     HiremeReq.findById({ _id: requestid })
       .then((request) => res.json(request))
@@ -26,7 +27,6 @@ export const getRequest = async (req, res, next) => {
     next(handleError(500, error.messsage));
   }
 };
-
 
 export const HiremeRequest = async (req, res, next) => {
   try {
@@ -48,11 +48,11 @@ export const HiremeRequest = async (req, res, next) => {
 
     const existingRequest = await HiremeReq.findOne({ email });
 
-    if(existingRequest) {
+    if (existingRequest) {
       return res.status(401).json({
         success: false,
-        message: "Request already exists please try after 3 days"
-      })
+        message: "Request already exists please try after 3 days",
+      });
     }
 
     // Save to temporary store
@@ -79,8 +79,31 @@ export const HiremeRequest = async (req, res, next) => {
 };
 
 export const deleteRequest = async (req, res, next) => {
-     const requestid = req.params.id;
-    HiremeReq.findByIdAndDelete({_id: requestid})
-    .then(res => res.json(res))
-    .catch(err => res.json(err));
-}
+  const requestid = req.params.id;
+  HiremeReq.findByIdAndDelete({ _id: requestid })
+    .then((res) => res.json(res))
+    .catch((err) => res.json(err));
+};
+
+export const requestDetail = async (req, res, next) => {
+  try {
+    if(!req.request) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized access"
+      });
+    }
+    
+    res.json(req.request);
+
+    res.status(200).status({
+      success: true,
+      message: "Authorized access",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: ["Internal Server Error"],
+    });
+  }
+};

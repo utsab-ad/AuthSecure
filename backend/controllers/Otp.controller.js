@@ -35,7 +35,7 @@ export const verifyLoginOtp = async (req, res) => {
     }
 
     res.cookie("jwt", token, {
-      httpsOnly: true,
+      httpOnly: true,
       secure: true,
       sameSite: "None",
       maxAge: maxAge * 1000,
@@ -85,8 +85,8 @@ export const verifyRequestOtp = async (req, res) => {
     const maxAge = 3 * 24 * 60 * 60;
     const token = CreateTokenHireme(newRequest, maxAge);
 
-    res.cookie("jwt", token, {
-      httpsOnly: true,
+    res.cookie("access_token", token, {
+      httpOnly: true,
       secure: true,
       sameSite: "None",
       maxAge: maxAge * 1000,
@@ -94,13 +94,13 @@ export const verifyRequestOtp = async (req, res) => {
 
     console.log("Cookie created succefully");
 
-    tempUserStore.delete(email);
+    tempRequeststore.delete(email);
 
     res.status(201).json({
       success: true,
       message: "Request submitted",
     });
   } catch (error) {
-    return res.status(500).json({ success: false, message: "Login Failed" });
+    return res.status(500).json({ success: false, message: "creation Failed" });
   }
 };

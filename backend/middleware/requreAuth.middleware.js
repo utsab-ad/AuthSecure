@@ -23,8 +23,8 @@ export const requireAuth = (req, res, next) => {
   })
 };
 
-export const hiremeRequestApp = (req, res, next) => {
-  const token = req.cookies.jwt;
+export const requireRequest = (req, res, next) => {
+  const token = req.cookies.access_token;
 
   if (!token) {
     return res.status(401).json({
