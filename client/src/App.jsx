@@ -16,6 +16,7 @@ import {
   RouteLogin,
   RouteLoginVerify,
   RoutePortfolioPageForm,
+  RouteRequestDetail,
   RouteTrackApplication,
 } from "./helper/RouteNames.js";
 import Index from "./Pages/Index";
@@ -34,6 +35,7 @@ import HiremePage from "./Pages/Hireme/HiremePage";
 import HiremeRequestVerify from "./Pages/Hireme/HiremeRequestVerify";
 import HiremeRequests from "./Pages/Hireme/HiremeRequests";
 import TrackApplication from "./Pages/Hireme/TrackApplication";
+import HiremeRequestDetails from "./Pages/Hireme/HiremeRequestDetails";
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function App() {
           <Route path={RouteBlogs} element={<Blogs />}></Route>
           <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
           <Route path={RouteHireme} element={<HiremePage />}></Route>
+          <Route path={RouteHiremeRequests} element={<HiremeRequests />}></Route>
+          <Route path={RouteRequestDetail()} element={<HiremeRequestDetails/>}></Route>
           <Route
             path={RouteTrackApplication}
             element={<TrackApplication />}

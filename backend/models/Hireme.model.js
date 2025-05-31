@@ -10,6 +10,11 @@ const hiremeSchema = new mongoose.Schema(
     noOfEmployees: Number,
     description: String,
     source: String,
+    status: {
+      type: String,
+      enum: ["pending", "accepted", "rejected"],
+      default: "pending",
+    },
   },
   { timestamps: true }
 );

@@ -1,6 +1,7 @@
+import Toast from "@/components/ui/Toast";
 import { RouteHiremeVerify } from "@/helper/RouteNames";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const HiremePage = () => {
@@ -16,15 +17,19 @@ const HiremePage = () => {
     source: "",
   });
 
+  const [message, setMessage] = useState("");
+  const [type, setType] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post(
+
+    try {
+      const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/forms/intern`,
         {
           companyName: formData.companyName,
@@ -37,12 +42,39 @@ const HiremePage = () => {
           source: formData.source,
         },
         { withCredentials: true }
-      )
-      .then(() => {
-        navigate(RouteHiremeVerify, { state: { email: formData.email }});
-      })
-      .catch((err) => console.log(err));
+      );
+
+      setMessage(res.data.message);
+      setType(res.data.success);
+
+      navigate(RouteHiremeVerify, { state: { email: formData.email } });
+    } catch (err) {
+      setMessage(
+        err.response?.data?.message || "Something went wrong. Please try again."
+      );
+      console.error(err);
+    }
   };
+
+  function ToastMessage({ message, duration = 5000 }) {
+    const [show, setShow] = useState(true);
+
+    useEffect(() => {
+      if (message) {
+        setShow(true);
+        const timer = setTimeout(() => setShow(false), duration);
+        return () => clearTimeout(timer);
+      }
+    }, [message]);
+
+    if (!show || !message) return null;
+
+    return (
+      <div className="fixed top-5 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-md bg-green-500 text-white shadow-lg transition-all duration-300 z-50">
+        {message}
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8">
@@ -196,6 +228,7 @@ const HiremePage = () => {
           </div>
         </form>
       </div>
+      <Toast message={message} type={type} onClose={() => setMessage("")} />
     </div>
   );
 };

@@ -26,6 +26,18 @@ export const RouteBlogDetail = (blogid) => {
 
 }
 
+export const RouteRequestDetail = (requestid) => {
+    
+    if(requestid) {
+        return `/offer/detail/${requestid}`
+    } else {
+        return "/offer/detail/:requestid"
+    }
+
+}
+
+export const RouteDeleteRequest = "/request/delete/:id"
+
 export const RouteDeleteBlog = "/blog/delete/:id"
 
 export const RouteIntern = "/hireme/intern"
