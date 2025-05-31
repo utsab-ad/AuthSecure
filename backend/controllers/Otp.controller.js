@@ -21,19 +21,18 @@ export const verifyLoginOtp = async (req, res) => {
   }
 
   try {
-    const newRequest = await HiremeReq.create({
-      companyName: data.companyName,
-      address: data.address,
-      email: data.email,
-      category: data.category,
-      contact: data.contact,
-      noOfEmployees: data.noOfEmployees,
-      description: data.description,
-      source: data.source,
-    });
+   const maxAge = 3 * 24 * 60 * 60;
 
-    const maxAge = 3 * 24 * 60 * 60;
-    const token = CreateTokenHireme(newRequest, maxAge);
+   const user = await User.findOne({ email });
+
+    const token = CreateToken(user, maxAge);
+
+    if (!token) {
+      return res.status(500).json({
+        success: false,
+        message: "Token is not created",
+      });
+    }
 
     res.cookie("jwt", token, {
       httpsOnly: true,
@@ -42,13 +41,10 @@ export const verifyLoginOtp = async (req, res) => {
       maxAge: maxAge * 1000,
     });
 
-    console.log("Cookie created succefully");
-
-    tempUserStore.delete(email);
-
-    return res.status(201).json({
+    res.status(201).json({
       success: true,
-      message: "User verified and registered successfully",
+      message: "Logged in successfully",
+      user: user.username,
     });
   } catch (error) {
     res.json(500).json({
