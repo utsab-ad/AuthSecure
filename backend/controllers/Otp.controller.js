@@ -3,6 +3,7 @@ import User from "../models/User.model.js";
 import { CreateToken, CreateTokenHireme } from "./Token.controller.js";
 import { tempRequeststore } from "../utils/tempRequestStore.js";
 import HiremeReq from "../models/Hireme.model.js";
+import { tempDeleteRequeststore } from "../utils/tempDeleteRequeststore.js";
 
 export const verifyLoginOtp = async (req, res) => {
   const { email, otp } = req.body;
@@ -104,3 +105,42 @@ export const verifyRequestOtp = async (req, res) => {
     return res.status(500).json({ success: false, message: "creation Failed" });
   }
 };
+
+export const verifyDelete = async (req, res, next) => {
+
+  const { email, otp } = req.body;
+  const data = tempDeleteRequeststore.get(email);
+
+  if (!data) {
+    return res
+      .status(404)
+      .json({ success: false, message: "No OTP request found" });
+  }
+
+  if (data.otp !== otp || Date.now() > data.otpExpires) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid or expired OTP" });
+  }
+
+  try {
+    
+    await HiremeReq.findByIdAndDelete({ _id: data.id })
+    .then((res) => res.json(res))
+    .catch((err) => res.json(err));
+    
+    res.clearCookie("access_token", {
+     httpsOnly: true,
+     secure: true,
+     sameSite: "None",
+   });
+    return res.status(200).json({
+      success: true,
+      message: "Deleted successfully",
+    });
+    
+  } catch (error) {
+    return res.status(500).json({ success: false, message: "Deletion Failed" });
+  }
+
+}

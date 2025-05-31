@@ -1,6 +1,11 @@
 import HiremeReq from "../models/Hireme.model.js";
-import { htmlHireme } from "../utils/emailPage.js";
+import {
+  htmlAccepted,
+  htmlDeleterequest,
+  htmlHireme,
+} from "../utils/emailPage.js";
 import sendEmail from "../utils/sendEmail.js";
+import { tempDeleteRequeststore } from "../utils/tempDeleteRequeststore.js";
 import { tempRequeststore } from "../utils/tempRequestStore.js";
 import { CreateTokenHireme } from "./Token.controller.js";
 
@@ -55,7 +60,6 @@ export const HiremeRequest = async (req, res, next) => {
       });
     }
 
-    // Save to temporary store
     tempRequeststore.set(email, {
       companyName,
       address,
@@ -85,15 +89,48 @@ export const deleteRequest = async (req, res, next) => {
     .catch((err) => res.json(err));
 };
 
-export const requestDetail = async (req, res, next) => {
+export const acceptRequest = async (req, res, next) => {
   try {
-    if(!req.request) {
-      return res.status(401).json({
+    const { id, email } = req.body;
+    
+    const accept = {
+      status: "accepted",
+    };
+
+    const html = htmlAccepted();
+
+    const updated = await HiremeReq.findByIdAndUpdate(id, accept);
+
+    if (!updated) {
+      return res.status(500).json({
         success: false,
-        message: "Unauthorized access"
+        message: ["Error while updating", error.message],
       });
     }
-    
+
+    await sendEmail(email, "Offer Accepted", html);
+
+    res.status(200).json({
+      success: true,
+      message: "All Good! Offer Accepted",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: ["Internal Server Error"],
+    });
+  }
+};
+
+export const requestDetail = async (req, res, next) => {
+  try {
+    if (!req.request) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized access",
+      });
+    }
+
     res.json(req.request);
 
     res.status(200).status({
@@ -104,6 +141,36 @@ export const requestDetail = async (req, res, next) => {
     res.status(500).json({
       success: false,
       message: ["Internal Server Error"],
+    });
+  }
+};
+
+export const deleteRequestByClient = async (req, res, next) => {
+  try {
+    const { id, email, companyName } = req.body;
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpires = Date.now() + 5 * 60 * 1000;
+
+    const html = htmlDeleterequest(companyName, otp);
+
+    tempDeleteRequeststore.set(email, {
+      id,
+      email,
+      companyName,
+      otp,
+      otpExpires,
+    });
+
+    await sendEmail(email, "OTP Verification", html);
+
+    return res.status(200).json({
+      success: true,
+      message: "OTP sent to email. Verify to complete deletion.",
+    });
+  } catch (error) {
+    res.status(500).json({
+      sucess: false,
+      message: ["Internal Server Error", error.message],
     });
   }
 };

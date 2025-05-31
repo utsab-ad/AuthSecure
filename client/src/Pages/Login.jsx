@@ -1,32 +1,41 @@
 import BackNavigation from "@/Buttons/BackNavigation";
 import HomeNavigation from "@/Buttons/HomeNavigation";
-import {RouteIndex, RouteLoginVerify} from "@/helper/RouteNames";
+import { RouteIndex, RouteLoginVerify } from "@/helper/RouteNames";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/user/user.slice.js";
+import Toast from "@/components/ui/Toast.jsx";
 
 const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const [message, setMessage] = useState("");
+  const [type, setType] = useState("");
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post(
+    try {
+      const res = await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
         {
           email,
           password,
         },
         { withCredentials: true }
-      )
-      .then((res) => {
-        navigate(RouteLoginVerify, { state: { email, password } });
-      })
-      .catch((err) => console.log(err));
+      );
+      setMessage(res.data.message);
+      setType(res.data.success);
+      navigate(RouteLoginVerify);
+    } catch (err) {
+      setMessage(
+        err.response?.data?.message || "Something went wrong. Please try again."
+      );
+      console.error(err);
+    }
   };
 
   return (
@@ -79,6 +88,7 @@ const Login = () => {
           </div>
         </form>
       </div>
+      <Toast message={message} type={type} onClose={() => setMessage("")} />
 
       <BackNavigation />
       <HomeNavigation />

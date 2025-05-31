@@ -47,10 +47,10 @@ function App() {
             <Route path={RouteCreateBlog} element={<CreateBlog />}></Route>
             <Route path={RouteEditBlog()} element={<UpdateBlog />}></Route>
           </Route>
+          <Route path={RouteHiremeRequests} element={<HiremeRequests />}></Route>
           <Route path={RouteBlogs} element={<Blogs />}></Route>
           <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
           <Route path={RouteHireme} element={<HiremePage />}></Route>
-          <Route path={RouteHiremeRequests} element={<HiremeRequests />}></Route>
           <Route path={RouteRequestDetail()} element={<HiremeRequestDetails/>}></Route>
           <Route
             path={RouteTrackApplication}

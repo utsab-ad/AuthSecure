@@ -8,6 +8,7 @@ import {
   FaBlog,
   FaJsSquare,
   FaCode,
+  FaSignInAlt,
 } from "react-icons/fa";
 import {
   HiOutlineMenu,
@@ -20,7 +21,7 @@ import { BsFillPostcardFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import SidebarProfile from "./SidebarProfile";
 import Footer from "@/helpingComponents/Footer";
-import { RouteBlogs, RouteIndex } from "@/helper/RouteNames";
+import { RouteBlogs, RouteIndex, RouteLogin } from "@/helper/RouteNames";
 import { GrLanguage } from "react-icons/gr";
 
 const Sidebar = () => {
@@ -34,18 +35,32 @@ const Sidebar = () => {
 
   return (
     <div className="flex w-full">
-
-        {/* For Mobile */}
+      {/* For Mobile */}
       <div
         className={`fixed md:hidden top-0 left-0 h-full z-50 transition-width duration-200 ease-in-out text-white ${
           isOpen ? "w-64" : "w-15"
         } bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900`}
       >
         <div className="flex items-center justify-between p-4">
-          <Link to={RouteIndex} onClick={toggleSidebar} className={`${isOpen ? "block" : "hidden"}`}>
+          <Link
+            to={RouteIndex}
+            onClick={toggleSidebar}
+            className={`${isOpen ? "block" : "hidden"}`}
+          >
             <FaHome size={24} />
           </Link>
           {user?.isLoggedIn && isOpen && <HiPencilAlt size={24} />}
+          {!user.isLoggedIn && isOpen && (
+            <Link
+              to={RouteLogin}
+              className="group relative flex items-center justify-center rounded-full cursor-pointer transition-all"
+            >
+              <FaSignInAlt className="text-purple-700 text-xl" />
+              <span className="absolute right-14 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow transition-opacity duration-300">
+                Login
+              </span>
+            </Link>
+          )}
           <button onClick={toggleSidebar}>
             {isOpen ? <IoMdClose size={24} /> : <HiOutlineMenu size={24} />}
           </button>
@@ -78,33 +93,39 @@ const Sidebar = () => {
                 </a>
               )}
             </li>
-              <li className="flex items-center p-4 hover:bg-gray-700">
-                <div className="flex gap-4 items-center mb-2 flex-wrap">
-                    <div className="flex items-center justify-start gap-2">
-                      <GrLanguage size={24} />
-                      {isOpen && <span className="font-medium">Languages</span>}
+            <li className="flex items-center p-4 hover:bg-gray-700">
+              <div className="flex gap-4 items-center mb-2 flex-wrap">
+                <div className="flex items-center justify-start gap-2">
+                  <GrLanguage size={24} />
+                  {isOpen && <span className="font-medium">Languages</span>}
+                </div>
+                {isOpen && (
+                  <div className="pl-8 space-y-2">
+                    <div className="flex justify-between gap-2">
+                      <FaJsSquare size={20} />
+                      <span>
+                        <b>Javascript</b>
+                      </span>
+                      <span className="text-green-400 text-sm">Main</span>
                     </div>
-                    {isOpen && (
-                      <div className="pl-8 space-y-2">
-                        <div className="flex justify-between gap-2">
-                          <FaJsSquare size={20} />
-                          <span><b>Javascript</b></span>
-                          <span className="text-green-400 text-sm">Main</span>
-                        </div>
-                        <div className="flex justify-between gap-2">
-                          <FaCode size={20} title="C" />
-                          <span><b>C</b></span>
-                          <span className="text-stone-400 text-sm">Foundation</span>
-                        </div>
-                        <div className="flex justify-between gap-2">
-                          <FaCode size={20} title="C++" />
-                          <span><b>C++</b></span>
-                          <span className="text-stone-400 text-sm">Foundation</span>
-                        </div>
-                      </div>
-                    )}
+                    <div className="flex justify-between gap-2">
+                      <FaCode size={20} title="C" />
+                      <span>
+                        <b>C</b>
+                      </span>
+                      <span className="text-stone-400 text-sm">Foundation</span>
                     </div>
-              </li>
+                    <div className="flex justify-between gap-2">
+                      <FaCode size={20} title="C++" />
+                      <span>
+                        <b>C++</b>
+                      </span>
+                      <span className="text-stone-400 text-sm">Foundation</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </li>
             <Link to="#">
               <li className="flex items-center p-4 hover:bg-gray-700">
                 <BsFillPostcardFill size={24} />
@@ -117,7 +138,7 @@ const Sidebar = () => {
                 {isOpen && <span className="ml-4">Blogs</span>}
               </li>
             </Link>
-             <li className="flex items-center p-4 hover:bg-gray-700 cursor-pointer ">
+            <li className="flex items-center p-4 hover:bg-gray-700 cursor-pointer ">
               <div className={`${isOpen ? "flex gap-4 mx-auto" : ""}`}>
                 <FaFacebookF size={24} />
                 {isOpen && <FaGithubSquare size={24} />}
@@ -134,6 +155,17 @@ const Sidebar = () => {
             <FaHome size={24} />
           </Link>
           {user?.isLoggedIn && <HiPencilAlt size={24} />}
+          {!user?.isLoggedIn && isOpen && (
+            <Link
+              to={RouteLogin}
+              className="group relative flex items-center justify-center rounded-full cursor-pointer transition-all"
+            >
+              <FaSignInAlt className="text-purple-700 text-xl" />
+              <span className="absolute right-14 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xs px-2 py-1 rounded shadow transition-opacity duration-300">
+                Login
+              </span>
+            </Link>
+          )}
         </div>
 
         <nav className="mt-4">
@@ -143,66 +175,72 @@ const Sidebar = () => {
                 <SidebarProfile isOpen={true} />
               </li>
             </Link>
-             <li className="flex items-center p-4 hover:bg-gray-700">
+            <li className="flex items-center p-4 hover:bg-gray-700">
               <HiOutlinePhoneMissedCall size={24} />
-                <a
-                  href="tel:+9779867508725"
-                  className="ml-4 text-blue-500 hover:underline"
-                >
-                  9867508725
-                </a>
+              <a
+                href="tel:+9779867508725"
+                className="ml-4 text-blue-500 hover:underline"
+              >
+                9867508725
+              </a>
             </li>
             <li className="flex items-center p-4 hover:bg-gray-700">
               <MdMailOutline size={24} />
-                <a
-                  href="mailto:utsabadhikari075@gmail.com"
-                  className="ml-4 text-blue-500 truncate hover:underline"
-                >
-                  utsabadhikari075@gmail.com
-                </a>
+              <a
+                href="mailto:utsabadhikari075@gmail.com"
+                className="ml-4 text-blue-500 truncate hover:underline"
+              >
+                utsabadhikari075@gmail.com
+              </a>
             </li>
-              <li className="flex items-center p-4 hover:bg-gray-700">
-                <div className="flex gap-4 items-center mb-2 flex-wrap">
-                    <div className="flex items-center justify-start gap-2">
-                      <GrLanguage size={24} />
-                    <span className="font-medium">Languages</span>
-                    </div>
-        
-                      <div className="pl-8 space-y-2">
-                        <div className="flex justify-between gap-2">
-                          <FaJsSquare size={20} />
-                          <span><b>Javascript</b></span>
-                          <span className="text-green-400 text-sm">Main</span>
-                        </div>
-                        <div className="flex justify-between gap-2">
-                          <FaCode size={20} title="C" />
-                          <span><b>C</b></span>
-                          <span className="text-stone-400 text-sm">Foundation</span>
-                        </div>
-                        <div className="flex justify-between gap-2">
-                          <FaCode size={20} title="C++" />
-                          <span><b>C++</b></span>
-                          <span className="text-stone-400 text-sm">Foundation</span>
-                        </div>
-                      </div>
-                    </div>
-              </li>
+            <li className="flex items-center p-4 hover:bg-gray-700">
+              <div className="flex gap-4 items-center mb-2 flex-wrap">
+                <div className="flex items-center justify-start gap-2">
+                  <GrLanguage size={24} />
+                  <span className="font-medium">Languages</span>
+                </div>
+
+                <div className="pl-8 space-y-2">
+                  <div className="flex justify-between gap-2">
+                    <FaJsSquare size={20} />
+                    <span>
+                      <b>Javascript</b>
+                    </span>
+                    <span className="text-green-400 text-sm">Main</span>
+                  </div>
+                  <div className="flex justify-between gap-2">
+                    <FaCode size={20} title="C" />
+                    <span>
+                      <b>C</b>
+                    </span>
+                    <span className="text-stone-400 text-sm">Foundation</span>
+                  </div>
+                  <div className="flex justify-between gap-2">
+                    <FaCode size={20} title="C++" />
+                    <span>
+                      <b>C++</b>
+                    </span>
+                    <span className="text-stone-400 text-sm">Foundation</span>
+                  </div>
+                </div>
+              </div>
+            </li>
             <Link to="#">
               <li className="flex items-center p-4 hover:bg-gray-700">
                 <BsFillPostcardFill size={24} />
-                 <span className="ml-4">Projects</span>
+                <span className="ml-4">Projects</span>
               </li>
             </Link>
             <Link to={RouteBlogs}>
               <li className="flex items-center p-4 hover:bg-gray-700">
                 <FaBlog size={24} />
-                 <span className="ml-4">Blogs</span>
+                <span className="ml-4">Blogs</span>
               </li>
             </Link>
-             <li className="flex items-center justify-evenly p-4 hover:bg-gray-700 cursor-pointer ">
-                <FaFacebookF size={24} />
-                <FaGithubSquare size={24} />
-                <FaWhatsapp size={24} />
+            <li className="flex items-center justify-evenly p-4 hover:bg-gray-700 cursor-pointer ">
+              <FaFacebookF size={24} />
+              <FaGithubSquare size={24} />
+              <FaWhatsapp size={24} />
             </li>
           </ul>
         </nav>
@@ -219,13 +257,11 @@ const Sidebar = () => {
           >
             <IoMdArrowRoundBack />
           </button>
-        
         )}
         <div className="flex-grow">
           <Outlet />
         </div>
         <Footer />
-    
       </div>
     </div>
   );
