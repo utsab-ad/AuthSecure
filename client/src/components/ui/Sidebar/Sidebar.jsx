@@ -45,7 +45,7 @@ const Sidebar = () => {
           <Link to={RouteIndex} onClick={toggleSidebar} className={`${isOpen ? "block" : "hidden"}`}>
             <FaHome size={24} />
           </Link>
-          {user?.isLoggedIn && <HiPencilAlt size={24} />}
+          {user?.isLoggedIn && isOpen && <HiPencilAlt size={24} />}
           <button onClick={toggleSidebar}>
             {isOpen ? <IoMdClose size={24} /> : <HiOutlineMenu size={24} />}
           </button>
