@@ -82,7 +82,7 @@ const touchStartX = useRef(null);
         <div className="md:hidden fixed left-0 top-1/2 z-40 transform -translate-y-1/2">
           <button
             onClick={() => setIsOpen(true)}
-            className="bg-gray-800 text-gray-500 rounded-r-xl h-50 py-4 hover:text-stone-600 transition-all duration-300"
+            className="bg-black text-gray-500 px-1 rounded-r-3xl h-50 py-4 hover:text-stone-600 transition-all duration-300"
           >
             <FaArrowRight size={10} />
           </button>
