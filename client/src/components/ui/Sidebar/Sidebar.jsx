@@ -79,7 +79,7 @@ const touchStartX = useRef(null);
     <div className="flex w-full">
       {/* Slide Button (Mobile) */}
       {!isOpen && (
-        <div className="fixed left-0 top-1/2 z-40 transform -translate-y-1/2">
+        <div className="md:hidden fixed left-0 top-1/2 z-40 transform -translate-y-1/2">
           <button
             onClick={() => setIsOpen(true)}
             className="bg-gray-800 text-gray-500 rounded-r-xl h-50 py-4 hover:text-stone-600 transition-all duration-300"
@@ -270,7 +270,7 @@ const touchStartX = useRef(null);
         {!isIndexRoute && (
           <button
             onClick={() => navigate(-1)}
-            className="fixed top-2 left-0 px-4 py-2 hover:text-stone-600"
+            className="fixed md:ml-74 top-2 left-0 px-4 py-2 hover:text-stone-600"
           >
             <IoMdArrowRoundBack />
           </button>

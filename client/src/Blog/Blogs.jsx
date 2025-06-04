@@ -28,7 +28,9 @@ const Blogs = () => {
 
   const handleDelete = (blogId) => {
     axios
-      .delete(`${import.meta.env.VITE_API_BASE_URL}/blog/api/delete-blog/${blogId}`)
+      .delete(
+        `${import.meta.env.VITE_API_BASE_URL}/blog/api/delete-blog/${blogId}`
+      )
       .then(() => navigate(RouteBlogs))
       .catch((err) => console.error(err));
   };
@@ -47,57 +49,41 @@ const Blogs = () => {
       )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {blogs.map((blog) => (
-          <div
+          <Link
+            to={RouteBlogDetail(blog._id)}
             key={blog._id}
-            className="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+            className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-md transition-shadow duration-300 p-4 flex flex-col justify-between gap-3"
           >
-            <div className="p-6 space-y-4">
-              <div className="flex justify-between items-start">
-                <h3 className="text-xl font-bold text-indigo-700">
-                  {blog.title}
-                </h3>
-                {user?.isLoggedIn && (
+            <div className="text-xs text-gray-500 font-medium">
+              {moment(blog.createdAt).format("DD MMM YYYY")}
+            </div>
+
+            <h3 className="text-lg font-semibold text-gray-800 line-clamp-2">
+              {blog.title}
+            </h3>
+              {user?.isLoggedIn && (
+                <div className="flex items-center gap-2">
                   <Link to={RouteEditBlog(blog._id)}>
                     <Button
-                      variant="outline"
-                      className="p-2 hover:bg-gray-100 transition"
+                      variant="ghost"
+                      size="icon"
+                      className="hover:bg-gray-100"
                       aria-label={`Edit ${blog.title}`}
                     >
-                      <HiPencilAlt className="text-lg" />
+                      <HiPencilAlt className="text-gray-500" />
                     </Button>
                   </Link>
-                )}
-              </div>
-
-              <p className="text-gray-700 text-sm leading-relaxed">
-                {blog.slug}
-              </p>
-
-             <Link
-                    to={RouteBlogDetail(blog._id)}
-                    className="inline-block w-fit text-sm font-medium text-white bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700 transition"
+                  <Button
+                    onClick={() => handleDelete(blog._id)}
+                    variant="destructive"
+                    size="icon"
+                    aria-label={`Delete ${blog.title}`}
                   >
-                    Read full blog →
-                  </Link>
-            </div>
-
-            <div className="flex justify-between items-center p-4 border-t border-gray-100">
-              <time className="text-sm text-gray-500 font-medium">
-                {moment(blog.createdAt).format("DD MMM YYYY")}
-              </time>
-
-              {user?.isLoggedIn && (
-                <Button
-                  onClick={() => handleDelete(blog._id)}
-                  className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-sm font-medium transition"
-                  aria-label={`Delete ${blog.title}`}
-                >
-                  <FaTrashAlt className="text-sm" />
-                  Delete
-                </Button>
+                    <FaTrashAlt className="text-white text-xs" />
+                  </Button>
+                </div>
               )}
-            </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
