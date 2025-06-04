@@ -32,8 +32,8 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isIndexRoute = location.pathname === "/";
-  const sidebarRef = useRef(null);
-  const touchStartX = useRef(null);
+const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
@@ -42,23 +42,36 @@ const Sidebar = () => {
   };
 
   const handleTouchMove = (e) => {
-    if (touchStartX.current === null) return;
+    touchEndX.current = e.touches[0].clientX;
+  };
 
-    const touchCurrentX = e.touches[0].clientX;
-    const diff = touchCurrentX - touchStartX.current;
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+
+    const diff = touchEndX.current - touchStartX.current;
 
     if (diff > 50) {
+      // Swipe right → open sidebar
       setIsOpen(true);
-      touchStartX.current = null;
+    } else if (diff < -50) {
+      // Swipe left → close sidebar
+      setIsOpen(false);
     }
+
+    // Reset
+    touchStartX.current = null;
+    touchEndX.current = null;
   };
 
   useEffect(() => {
     window.addEventListener("touchstart", handleTouchStart);
     window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
+
     return () => {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
@@ -78,7 +91,6 @@ const Sidebar = () => {
 
       {/* Sidebar Overlay (Mobile) */}
       <div
-        ref={sidebarRef}
         className={`fixed top-0 left-0 h-full z-50 w-74 md:hidden bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
@@ -258,7 +270,7 @@ const Sidebar = () => {
         {!isIndexRoute && (
           <button
             onClick={() => navigate(-1)}
-            className="fixed top-2 left-20 md:left-72 px-4 py-2 hover:text-stone-600"
+            className="fixed top-2 left-0 px-4 py-2 hover:text-stone-600"
           >
             <IoMdArrowRoundBack />
           </button>
