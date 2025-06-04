@@ -36,6 +36,7 @@ import HiremeRequestVerify from "./Pages/Hireme/HiremeRequestVerify";
 import HiremeRequests from "./Pages/Hireme/HiremeRequests";
 import TrackApplication from "./Pages/Hireme/TrackApplication";
 import HiremeRequestDetails from "./Pages/Hireme/HiremeRequestDetails";
+// import Test from "./Pages/Test";
 
 function App() {
   return (
@@ -47,11 +48,17 @@ function App() {
             <Route path={RouteCreateBlog} element={<CreateBlog />}></Route>
             <Route path={RouteEditBlog()} element={<UpdateBlog />}></Route>
           </Route>
-          <Route path={RouteHiremeRequests} element={<HiremeRequests />}></Route>
+          <Route
+            path={RouteHiremeRequests}
+            element={<HiremeRequests />}
+          ></Route>
           <Route path={RouteBlogs} element={<Blogs />}></Route>
           <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
           <Route path={RouteHireme} element={<HiremePage />}></Route>
-          <Route path={RouteRequestDetail()} element={<HiremeRequestDetails/>}></Route>
+          <Route
+            path={RouteRequestDetail()}
+            element={<HiremeRequestDetails />}
+          ></Route>
           <Route
             path={RouteTrackApplication}
             element={<TrackApplication />}
@@ -72,6 +79,7 @@ function App() {
         <Route path={RouteLogin} element={<Login />}></Route>
         <Route path={RouteLoginVerify} element={<LoginVerify />}></Route>
         <Route path="*" element={<Page_404 />}></Route>
+        {/* <Route path={RouteTest} element={<Test />}></Route> */}
       </Routes>
     </BrowserRouter>
   );

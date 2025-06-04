@@ -48,3 +48,5 @@ export const RouteTrackApplication = "/track-application"
 export const RouteCreate = "/create"
 export const RouteLandingPageForm = "/create/landingpg"
 export const RoutePortfolioPageForm = "/create/portfolio"
+
+export const RouteTest = "/test"
