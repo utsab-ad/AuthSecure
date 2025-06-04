@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../redux/user/user.slice.js";
 import Toast from "@/components/ui/Toast.jsx";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const [email, setEmail] = useState();
@@ -38,11 +39,21 @@ const Login = () => {
     }
   };
 
+  
+
   return (
     <div className="w-full-screen bg-stone-100 mx-auto flex items-center justify-center h-[100vh]">
       <div className="max-w-sm mx-auto mt-10 flex flex-col items-center justify-center bg-white shadow-xl border border-gray-200 rounded-2xl p-6">
         <h2 className="text-3xl font-bold text-indigo-700 mb-4">Login</h2>
-
+        <button
+          // googleLogin
+          className="rounded-3xl bg-stone-800 text-white cursor-pointer mb-2
+        hover:bg-stone-400 w-full hover:text-black px-2 py-2 text-sm flex justify-center items-center gap-2"
+        >
+          <FcGoogle size={30} />
+          Continue with Google
+        </button>
+        <h2 className="text-xl">OR</h2>
         <form onSubmit={handleSubmit} className="w-full space-y-4">
           <div className="flex flex-col">
             <label
