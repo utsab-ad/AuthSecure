@@ -1,88 +1,23 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
-import "./index.css";
-import {
-  RouteBlogDetail,
-  RouteBlogs,
-  RouteCreateBlog,
-  RouteEditBlog,
-  RouteHireme,
-  RouteHiremeRequests,
-  RouteHiremeVerify,
-  RouteHome,
-  RouteIndex,
-  RouteLandingPageForm,
-  RouteLogin,
-  RouteLoginVerify,
-  RoutePortfolioPageForm,
-  RouteRequestDetail,
-  RouteTrackApplication,
-} from "./helper/RouteNames.js";
+
+import './App.css'
+import { RouteChatbot, RouteIndex } from "./helpers/RouteNames";
 import Index from "./Pages/Index";
-import Login from "./Pages/Login";
-import Page_404 from "./Pages/Page_404";
-import AuthRouteProtection from "./helpingComponents/AuthRouteProtection";
-import CreateBlog from "./Blog/CreateBlog";
-import Blogs from "./Blog/Blogs";
-import BlogDetail from "./Blog/BlogDetail";
-import UpdateBlog from "./Blog/UpdateBlog";
-import LoginVerify from "./Pages/LoginVerify";
-import LandingPageForm from "./Pages/Create/LandingPageForm";
-import PortfolioPageForm from "./Pages/Create/PortfolioForm";
-import Sidebar from "./components/ui/Sidebar/Sidebar";
-import HiremePage from "./Pages/Hireme/HiremePage";
-import HiremeRequestVerify from "./Pages/Hireme/HiremeRequestVerify";
-import HiremeRequests from "./Pages/Hireme/HiremeRequests";
-import TrackApplication from "./Pages/Hireme/TrackApplication";
-import HiremeRequestDetails from "./Pages/Hireme/HiremeRequestDetails";
-// import Test from "./Pages/Test";
+import Chatbot from "./Pages/chatbot/Chatbot";
 
 function App() {
+
   return (
-    <BrowserRouter>
+     <BrowserRouter>
+     
       <Routes>
-        <Route path={RouteIndex} element={<Sidebar />}>
-          <Route index element={<Index />}></Route>
-          <Route element={<AuthRouteProtection />}>
-            <Route path={RouteCreateBlog} element={<CreateBlog />}></Route>
-            <Route path={RouteEditBlog()} element={<UpdateBlog />}></Route>
-          </Route>
-          <Route
-            path={RouteHiremeRequests}
-            element={<HiremeRequests />}
-          ></Route>
-          <Route path={RouteBlogs} element={<Blogs />}></Route>
-          <Route path={RouteBlogDetail()} element={<BlogDetail />}></Route>
-          <Route path={RouteHireme} element={<HiremePage />}></Route>
-          <Route
-            path={RouteRequestDetail()}
-            element={<HiremeRequestDetails />}
-          ></Route>
-          <Route
-            path={RouteTrackApplication}
-            element={<TrackApplication />}
-          ></Route>
-          <Route
-            path={RouteHiremeVerify}
-            element={<HiremeRequestVerify />}
-          ></Route>
-          <Route
-            path={RouteLandingPageForm}
-            element={<LandingPageForm />}
-          ></Route>
-          <Route
-            path={RoutePortfolioPageForm}
-            element={<PortfolioPageForm />}
-          ></Route>
-        </Route>
-        <Route path={RouteLogin} element={<Login />}></Route>
-        <Route path={RouteLoginVerify} element={<LoginVerify />}></Route>
-        <Route path="*" element={<Page_404 />}></Route>
-        {/* <Route path={RouteTest} element={<Test />}></Route> */}
+
+      <Route path={RouteIndex} element={<Index/>}></Route>
+      <Route path={RouteChatbot} element={<Chatbot/>}></Route>
+
       </Routes>
-    </BrowserRouter>
-  );
+     </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
