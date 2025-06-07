@@ -119,7 +119,7 @@ const Chatbot = () => {
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="p-4 flex items-center gap-2 md:mb-0 mb-3"
+        className="p-4 flex items-center gap-2 md:mb-0 mb-6"
       >
         <input
           type="text"
