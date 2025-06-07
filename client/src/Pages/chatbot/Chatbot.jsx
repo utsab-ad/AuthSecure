@@ -119,18 +119,18 @@ const Chatbot = () => {
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-4 flex items-center gap-2 border-t shadow-md"
+        className="p-4 flex items-center gap-2 md:mb-0 mb-3"
       >
         <input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-400"
+          className="flex-1 px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-400 shadow-md"
         />
         <button
           type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-md"
         >
           Send
         </button>
