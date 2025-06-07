@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Chatbot = () => {
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
+  const [loading, setLoading] = useState(false); // <-- loading state
   const chatEndRef = useRef(null);
 
   const navigate = useNavigate();
@@ -17,6 +18,8 @@ const Chatbot = () => {
     if (!message.trim()) return;
 
     setChatHistory((prev) => [...prev, { sender: "user", text: message }]);
+    setMessage("");
+    setLoading(true); // <-- start loading
 
     try {
       const res = await axios.post(
@@ -28,20 +31,20 @@ const Chatbot = () => {
         ...prev,
         { sender: "agent", text: res.data.message },
       ]);
-      setMessage("");
     } catch (err) {
       setChatHistory((prev) => [
         ...prev,
         { sender: "agent", text: "Error: Unable to fetch response." },
       ]);
+    } finally {
+      setLoading(false); // <-- stop loading
     }
   };
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chatHistory]);
+  }, [chatHistory, loading]);
 
-  // Copy to clipboard
   const copyToClipboard = async (text) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -51,9 +54,8 @@ const Chatbot = () => {
     }
   };
 
-  // Render AI response (with code blocks)
   const renderAgentMessage = (text) => {
-    const parts = text.split(/```/g); // split code blocks
+    const parts = text.split(/```/g);
     return parts.map((part, i) => {
       const isCode = i % 2 !== 0;
       return isCode ? (
@@ -113,6 +115,17 @@ const Chatbot = () => {
             </div>
           </div>
         ))}
+
+        {/* Loading bubble */}
+        {loading && (
+          <div className="flex justify-start">
+            <div className="max-w-[80%] px-4 py-2 rounded-lg shadow-md bg-white text-gray-800 animate-pulse">
+              <p className="font-semibold mb-1">Agent</p>
+              <p>Thinking...</p>
+            </div>
+          </div>
+        )}
+
         <div ref={chatEndRef}></div>
       </div>
 
@@ -131,10 +144,13 @@ const Chatbot = () => {
         <button
           type="submit"
           className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-md"
+          disabled={loading} // optional: disable button while loading
         >
           Send
         </button>
       </form>
+
+      {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
         className={`fixed ml-2 mt-2 pl-2 pt-2 left-0 hover:text-stone-600 top-0 cursor-pointer`}
