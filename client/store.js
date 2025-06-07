@@ -21,5 +21,3 @@ export const store = configureStore({
         getDefaultMiddleware({ serializableCheck: false})
   });
   export const persistor = persistStore(store);
-
-// Infer the `RootState` and `AppDispatch` types from the store itse
