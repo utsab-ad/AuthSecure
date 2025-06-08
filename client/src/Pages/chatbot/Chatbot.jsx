@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import oneDark from "react-syntax-highlighter/dist/esm/styles/prism/one-dark";
+
 import { Button } from "@/components/ui/button";
 import { IoSend } from "react-icons/io5";
 
@@ -142,7 +143,8 @@ const Chatbot = () => {
             disabled={loading}
             className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
           >
-           send<IoSend/>
+            send
+            <IoSend />
           </Button>
         </form>
       </div>
