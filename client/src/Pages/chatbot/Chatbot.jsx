@@ -2,16 +2,14 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { IoMdArrowRoundBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { IoSend } from "react-icons/io5";
 
 const Chatbot = () => {
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
-  const [loading, setLoading] = useState(false); // <-- loading state
+  const [loading, setLoading] = useState(false);
   const chatEndRef = useRef(null);
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +17,7 @@ const Chatbot = () => {
 
     setChatHistory((prev) => [...prev, { sender: "user", text: message }]);
     setMessage("");
-    setLoading(true); // <-- start loading
+    setLoading(true);
 
     try {
       const res = await axios.post(
@@ -37,7 +35,7 @@ const Chatbot = () => {
         { sender: "agent", text: "Error: Unable to fetch response." },
       ]);
     } finally {
-      setLoading(false); // <-- stop loading
+      setLoading(false);
     }
   };
 
@@ -49,7 +47,7 @@ const Chatbot = () => {
     try {
       await navigator.clipboard.writeText(text);
       alert("Copied to clipboard!");
-    } catch (err) {
+    } catch {
       alert("Failed to copy.");
     }
   };
@@ -87,9 +85,9 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
-      {/* Chat Box */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+    <div className="flex flex-col min-h-screen text-gray-800 dark:text-white">
+      {/* Chat History */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 max-h-[calc(100vh-80px)]">
         {chatHistory.map((chat, index) => (
           <div
             key={index}
@@ -101,7 +99,7 @@ const Chatbot = () => {
               className={`max-w-[80%] px-4 py-2 rounded-lg shadow-md ${
                 chat.sender === "user"
                   ? "bg-blue-500 text-white"
-                  : "bg-white text-gray-800"
+                  : "bg-white dark:bg-gray-800 text-gray-800 dark:text-white"
               }`}
             >
               <p className="font-semibold mb-1">
@@ -116,10 +114,10 @@ const Chatbot = () => {
           </div>
         ))}
 
-        {/* Loading bubble */}
+        {/* Loading */}
         {loading && (
           <div className="flex justify-start">
-            <div className="max-w-[80%] px-4 py-2 rounded-lg shadow-md bg-white text-gray-800 animate-pulse">
+            <div className="max-w-[80%] px-4 py-2 rounded-lg shadow-md bg-white dark:bg-gray-800 text-gray-800 dark:text-white animate-pulse">
               <p className="font-semibold mb-1">Agent</p>
               <p>Thinking...</p>
             </div>
@@ -129,34 +127,25 @@ const Chatbot = () => {
         <div ref={chatEndRef}></div>
       </div>
 
-      {/* Input */}
-      <form
-        onSubmit={handleSubmit}
-        className="p-4 flex items-center gap-2 md:mb-0 mb-6"
-      >
-        <input
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Type your message..."
-          className="flex-1 px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-indigo-400 shadow-md"
-        />
-        <button
-          type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition shadow-md"
-          disabled={loading} // optional: disable button while loading
-        >
-          Send
-        </button>
-      </form>
-
-      {/* Back Button */}
-      <button
-        onClick={() => navigate(-1)}
-        className={`fixed ml-2 mt-2 pl-2 pt-2 left-0 hover:text-stone-600 top-0 cursor-pointer`}
-      >
-        <IoMdArrowRoundBack />
-      </button>
+      {/* Input Area */}
+      <div className="w-full px-4 py-3 sticky bottom-0">
+        <form onSubmit={handleSubmit} className="flex gap-2 items-center">
+          <input
+            type="text"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Type your message..."
+            className="flex-1 px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 dark:text-white outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+          <Button
+            type="submit"
+            disabled={loading}
+            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+          >
+           send<IoSend/>
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };
