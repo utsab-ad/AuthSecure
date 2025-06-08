@@ -19,7 +19,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const allowedOrigins = [process.env.FRONTEND_URL, "https://authsecure-mu.vercel.app"];
+const allowedOrigins = [process.env.FRONTEND_URL, 
+  "https://authsecure-mu.vercel.app", 
+  "https://utsabadhikari.name.np"];
 
 app.use(cors({
   origin: function (origin, callback) {
