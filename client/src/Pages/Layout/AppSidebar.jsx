@@ -8,6 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Link } from "react-router-dom";
 import { IoDocumentTextOutline, IoHomeOutline } from "react-icons/io5";
@@ -24,7 +25,11 @@ const AppSidebar = () => {
   return (
       <Sidebar>
         <SidebarContent className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white transition-transform duration-300 ease-in-out">
-          <SidebarHeader className=""></SidebarHeader>
+          <SidebarHeader className="flex justify-center items-end">
+
+    <SidebarTrigger className="md:hidden"/>
+
+          </SidebarHeader>
           <SidebarGroup>
             <SidebarMenu>
               <SidebarMenuItem className="w-full flex flex-col justify-center items-center">
