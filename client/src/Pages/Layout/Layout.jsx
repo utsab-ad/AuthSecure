@@ -22,7 +22,15 @@ const Layout = () => {
           {!isIndexRoute && (
             <button
               onClick={() => navigate(-1)}
-              className={`fixed top-8 md:top-2 left-1 md:left-0 hover:text-stone-600 cursor-pointer`}
+              className={`fixed top-8 md:hidden left-1  hover:text-stone-600 cursor-pointer`}
+            >
+              <IoMdArrowRoundBack />
+            </button>
+          )}
+            {!isIndexRoute && (
+            <button
+              onClick={() => navigate(-1)}
+              className={`fixed top-2 hidden md:block  hover:text-stone-600 cursor-pointer`}
             >
               <IoMdArrowRoundBack />
             </button>
