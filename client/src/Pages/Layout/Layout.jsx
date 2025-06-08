@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import AppSidebar from "./AppSidebar";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import { RiChatVoiceAiFill } from "react-icons/ri";
@@ -17,6 +17,7 @@ const Layout = () => {
       <AppSidebar />
       <main className="w-full">
         <div className="w-full min-h-screen bg-gradient-to-br from-indigo-50 via-blue-200 text-gray-800 font-sans transition-colors duration-500">
+          <SidebarTrigger className="md:hidden "/>
           <Outlet />
           {!isIndexRoute && (
             <button

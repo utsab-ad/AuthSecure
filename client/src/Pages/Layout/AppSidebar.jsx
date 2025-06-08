@@ -16,77 +16,76 @@ import { FaBlog } from "react-icons/fa6";
 import { FiUsers } from "react-icons/fi";
 import { GoDot } from "react-icons/go";
 import { FcAbout } from "react-icons/fc";
-import { useSelector } from "react-redux";
 import { GrProjects } from "react-icons/gr";
 import { RouteDocs, RouteIndex } from "@/helpers/RouteNames";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const AppSidebar = () => {
   return (
-    <Sidebar className="">
-      <SidebarContent className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white transition-transform duration-300 ease-in-out">
-      <SidebarHeader className=""></SidebarHeader>
-        <SidebarGroup>
-          <SidebarMenu>
-            <SidebarMenuItem className="w-full flex flex-col justify-center items-center">
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-              <h1>Utsab Adhikari</h1>
-            </SidebarMenuItem>
-            <Link to={RouteIndex}>
+      <Sidebar>
+        <SidebarContent className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white transition-transform duration-300 ease-in-out">
+          <SidebarHeader className=""></SidebarHeader>
+          <SidebarGroup>
+            <SidebarMenu>
+              <SidebarMenuItem className="w-full flex flex-col justify-center items-center">
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <h1>Utsab Adhikari</h1>
+              </SidebarMenuItem>
+              <Link to={RouteIndex}>
+                <SidebarMenuItem>
+                  <SidebarMenuButton>
+                    <IoHomeOutline className="cursor-pointer" />
+                    <p className="cursor-pointer w-full">Home</p>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </Link>
               <SidebarMenuItem>
                 <SidebarMenuButton>
-                  <IoHomeOutline className="cursor-pointer" />
-                  <p className="cursor-pointer w-full">Home</p>
+                  <FaBlog /> <Link>Blogs</Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-            </Link>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <FaBlog /> <Link>Blogs</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <GrProjects />
-                <Link>Projects</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <BiCategoryAlt /> <Link>Categories</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <FiUsers />
-                <Link>Users</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <GrProjects />
+                  <Link>Projects</Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <BiCategoryAlt /> <Link>Categories</Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <FiUsers />
+                  <Link>Users</Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroup>
 
-        <SidebarGroup>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <GoDot />
-                <Link>new cate</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+          <SidebarGroup>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <GoDot />
+                  <Link>new cate</Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
 
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <IoDocumentTextOutline />
-                <Link to={RouteDocs}>Documentation</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <IoDocumentTextOutline />
+                  <Link to={RouteDocs}>Documentation</Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroup>
+        </SidebarContent>
+      </Sidebar>
   );
 };
 

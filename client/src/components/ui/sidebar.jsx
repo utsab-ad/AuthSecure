@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
+import { TiThMenu } from "react-icons/ti";
 import {
   Sheet,
   SheetContent,
@@ -239,7 +240,7 @@ function SidebarTrigger({
         toggleSidebar()
       }}
       {...props}>
-      <PanelLeftIcon />
+      <TiThMenu/>
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );
