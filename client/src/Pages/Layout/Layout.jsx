@@ -17,12 +17,12 @@ const Layout = () => {
       <AppSidebar />
       <main className="w-full">
         <div className="w-full min-h-screen bg-gradient-to-br from-indigo-50 via-blue-200 text-gray-800 font-sans transition-colors duration-500">
-          <SidebarTrigger className="md:hidden "/>
+          <SidebarTrigger className="md:hidden fixed top-0"/>
           <Outlet />
           {!isIndexRoute && (
             <button
               onClick={() => navigate(-1)}
-              className={`fixed top-2 hover:text-stone-600 top-0 cursor-pointer`}
+              className={`fixed top-8 md:top-2 left-1 md:left-0 hover:text-stone-600 cursor-pointer`}
             >
               <IoMdArrowRoundBack />
             </button>
