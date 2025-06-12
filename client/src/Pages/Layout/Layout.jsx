@@ -6,6 +6,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import { RiChatVoiceAiFill } from "react-icons/ri";
 import { RouteChatbot } from "@/helpers/RouteNames.js";
+import Footer from "@/components/Footer.jsx";
 
 const Layout = () => {
   const navigate = useNavigate();
@@ -17,8 +18,9 @@ const Layout = () => {
       <AppSidebar />
       <main className="w-full">
         <div className="w-full min-h-screen bg-gradient-to-br from-indigo-50 via-blue-200 text-gray-800 font-sans transition-colors duration-500">
-          <SidebarTrigger className="md:hidden fixed top-0"/>
+          <SidebarTrigger className="md:hidden fixed top-0" />
           <Outlet />
+          <Footer/>
           {!isIndexRoute && (
             <button
               onClick={() => navigate(-1)}
@@ -27,7 +29,7 @@ const Layout = () => {
               <IoMdArrowRoundBack />
             </button>
           )}
-            {!isIndexRoute && (
+          {!isIndexRoute && (
             <button
               onClick={() => navigate(-1)}
               className={`fixed top-2 hidden md:block  hover:text-stone-600 cursor-pointer`}
