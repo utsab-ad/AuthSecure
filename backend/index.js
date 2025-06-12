@@ -5,6 +5,8 @@ import bodyParser from "body-parser"
 import cors from "cors"
 import ChatbotRoute from "./routes/Chatbot.routes.js"
 import ConnectDB from "./db/ConnectDB.db.js"
+import AuthRoute from "./routes/Auth.routes.js"
+import NewsRoute from "./routes/News.routes.js"
 
 dotenv.config();
 
@@ -45,6 +47,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/test", ChatbotRoute);
+app.use("/auth", AuthRoute);
+app.use("/news", NewsRoute);
 
 //listining
 

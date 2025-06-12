@@ -27,3 +27,7 @@ export const RouteCreateTrack = "/create/track"
 
 //Documentation Routes
 export const RouteDocs = "/docs"
+
+
+//News
+export const RouteNews = "/news@kathmandupost"

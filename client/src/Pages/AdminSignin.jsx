@@ -8,7 +8,6 @@ const AdminSignin = () => {
         <LoginForm />
       </div>
     </div>
-
   );
 };
 

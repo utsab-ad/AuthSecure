@@ -4,11 +4,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { RiChatVoiceAiFill } from "react-icons/ri";
 import { Sidebar } from "@/components/ui/sidebar";
+import Cookies from "js-cookie";
 
 const Index = () => {
+  const isLoggedIn = Cookies.get("access_token");
   return (
     <div className="">
-     <div className="max-w-7xl mx-auto px-4 py-16 flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
+      <div className="max-w-7xl mx-auto px-4 py-16 flex flex-col-reverse lg:flex-row items-center justify-between gap-10">
         <div className="w-full lg:w-1/2 text-center lg:text-left">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo-700 leading-tight mb-4">
             Hi, I'm Utsab 👋
@@ -33,7 +35,6 @@ const Index = () => {
             >
               Lets Create
             </button>
-
           </div>
         </div>
 
@@ -45,6 +46,11 @@ const Index = () => {
           />
         </div>
       </div>
+      {isLoggedIn ? (
+        <Button>
+          <p className="text-black font-bold">Hello Logged in User</p>
+        </Button>
+      ) : (<></>)}
     </div>
   );
 };
