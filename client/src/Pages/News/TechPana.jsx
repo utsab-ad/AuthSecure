@@ -77,72 +77,68 @@ const TechPana = () => {
           </Link>
         </div>
       </div> */}
-
-      <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
-        {loading ? (
-          <>
-            {" "}
-            <div className="flex justify-center items-center flex-col space-y-3">
-              <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-[250px]" />
-                <Skeleton className="h-4 w-[200px]" />
-              </div>
+      {loading ? (
+        <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+          <div className="flex mb-3 justify-center items-center flex-col space-y-3 px-4">
+            <Skeleton className="h-[125px] w-full max-w-sm rounded-xl" />
+            <div className="space-y-2 w-full max-w-sm">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-3/4" />
             </div>
-            <div className="flex justify-center items-center flex-col space-y-3">
-              <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-[250px]" />
-                <Skeleton className="h-4 w-[200px]" />
-              </div>
+          </div>
+          <div className="flex mb-3 justify-center items-center flex-col space-y-3 px-4">
+            <Skeleton className="h-[125px] w-full max-w-sm rounded-xl" />
+            <div className="space-y-2 w-full max-w-sm">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-3/4" />
             </div>
-            <div className="flex justify-center items-center flex-col space-y-3">
-              <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-[250px]" />
-                <Skeleton className="h-4 w-[200px]" />
-              </div>
+          </div>
+          <div className="flex mb-3 justify-center items-center flex-col space-y-3 px-4">
+            <Skeleton className="h-[125px] w-full max-w-sm rounded-xl" />
+            <div className="space-y-2 w-full max-w-sm">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-3/4" />
             </div>
-          </>
-        ) : (
-          <>
-            {newses &&
-              newses.map((news) => (
-                <>
-                  {news.headline && news.link && news.image && (
-                    <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
-                      <img
-                        src={news.image}
-                        className="rounded-t-lg"
-                        alt="image"
-                      />
-                      <div className="px-3 py-2 pb-4">
-                        <p
-                          style={{
-                            fontFamily: "'Noto Sans Devanagari', sans-serif",
-                          }}
-                          className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
-                        >
-                          {news.headline}
-                        </p>
-                        <div className="w-full">
-                          <Link to={`${news.link}`}>
-                            <Button
-                              variant=""
-                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                            >
-                              Read at Tech Pana
-                            </Button>
-                          </Link>
-                        </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          {newses &&
+            newses.map((news) => (
+              <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+                {news.headline && news.link && news.image && (
+                  <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                    <img
+                      src={news.image}
+                      className="rounded-t-lg"
+                      alt="image"
+                    />
+                    <div className="px-3 py-2 pb-4">
+                      <p
+                        style={{
+                          fontFamily: "'Noto Sans Devanagari', sans-serif",
+                        }}
+                        className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                      >
+                        {news.headline}
+                      </p>
+                      <div className="w-full">
+                        <Link to={`${news.link}`}>
+                          <Button
+                            variant=""
+                            className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                          >
+                            Read at Tech Pana
+                          </Button>
+                        </Link>
                       </div>
-                    </card>
-                  )}
-                </>
-              ))}
-          </>
-        )}
-      </div>
+                    </div>
+                  </card>
+                )}
+              </div>
+            ))}
+        </>
+      )}
     </div>
   );
 };

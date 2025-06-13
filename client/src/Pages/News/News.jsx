@@ -68,30 +68,29 @@ const News = () => {
       </div>
 
       {loading ? (
-        <>
-          {" "}
-          <div className="flex mb-3 justify-center items-center flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
+        <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+          <div className="flex mb-3 justify-center items-center flex-col space-y-3 px-4">
+            <Skeleton className="h-[125px] w-full max-w-sm rounded-xl" />
+            <div className="space-y-2 w-full max-w-sm">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-3/4" />
             </div>
           </div>
-          <div className="flex justify-center items-center flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
+          <div className="flex mb-3 justify-center items-center flex-col space-y-3 px-4">
+            <Skeleton className="h-[125px] w-full max-w-sm rounded-xl" />
+            <div className="space-y-2 w-full max-w-sm">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-3/4" />
             </div>
           </div>
-          <div className="flex justify-center items-center flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
+          <div className="flex mb-3 justify-center items-center flex-col space-y-3 px-4">
+            <Skeleton className="h-[125px] w-full max-w-sm rounded-xl" />
+            <div className="space-y-2 w-full max-w-sm">
+              <Skeleton className="h-4 w-full" />
+              <Skeleton className="h-4 w-3/4" />
             </div>
           </div>
-        </>
+        </div>
       ) : (
         <>
           <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
