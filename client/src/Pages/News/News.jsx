@@ -13,14 +13,17 @@ import {
   RouteKathmanduPost,
   RouteTechPana,
 } from "@/helpers/RouteNames.js";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const News = () => {
   const [newses, setNews] = useState([]);
   const [ktmposts, setktmPost] = useState([]);
   const [techpanas, setTechPana] = useState([]);
   const [ekantiposts, setEkantipost] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const getNews = async () => {
       try {
         const ktmpost = await axios.get(
@@ -41,7 +44,9 @@ const News = () => {
         const topKanitpost = ekantipur.data.news.slice(0, 3);
         setEkantipost(topKanitpost);
       } catch (error) {
-        console.error("Failed to fetch news:", error);
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -83,29 +88,48 @@ const News = () => {
         {ktmposts &&
           ktmposts.map((news) => (
             <>
-              {news.headline && news.slug && news.link && news.image && (
-                <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
-                  <img src={news.image} className="rounded-t-lg" alt="image" />
-                  <div className="px-3 py-2 pb-4">
-                    <h2 className="text-lg text-stone-900 font-bold">
-                      {news.headline}
-                    </h2>
-
-                    <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
-                      {news.slug}
-                    </p>
-                    <div className="w-full">
-                      <Link to={`https://kathmandupost.com${news.link}`}>
-                        <Button
-                          variant=""
-                          className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                        >
-                          Read at The Kathmandu Post
-                        </Button>
-                      </Link>
+              {loading ? (
+                <>
+                  {" "}
+                  <div className="flex justify-center items-center flex-col space-y-3">
+                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-[250px]" />
+                      <Skeleton className="h-4 w-[200px]" />
                     </div>
                   </div>
-                </card>
+                </>
+              ) : (
+                <>
+                  {news.headline && news.slug && news.link && news.image && (
+                    <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                      <img
+                        src={news.image}
+                        className="rounded-t-lg"
+                        alt="image"
+                      />
+                      <div className="px-3 py-2 pb-4">
+                        <h2 className="text-lg text-stone-900 font-bold">
+                          {news.headline}
+                        </h2>
+
+                        <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
+                          {news.slug}
+                        </p>
+                        <div className="w-full">
+                          <Link to={`https://kathmandupost.com${news.link}`}>
+                            <Button
+                              variant=""
+                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                            >
+                              Read at The Kathmandu Post
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </card>
+                  )}
+                </>
               )}
             </>
           ))}
@@ -128,31 +152,50 @@ const News = () => {
         {techpanas &&
           techpanas.map((news) => (
             <>
-               {news.headline && news.link && news.image && (
-                <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
-                  <img src={news.image} className="rounded-t-lg" alt="image" />
-                  <div className="px-3 py-2 pb-4">
-
-                    <p
-                      style={{
-                        fontFamily: "'Noto Sans Devanagari', sans-serif",
-                      }}
-                      className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
-                    >
-                      {news.headline}
-                    </p>
-                    <div className="w-full">
-                      <Link to={`${news.link}`}>
-                        <Button
-                          variant=""
-                          className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                        >
-                          Read at Tech Pana
-                        </Button>
-                      </Link>
+              {loading ? (
+                <>
+                  {" "}
+                  <div className="flex justify-center items-center flex-col space-y-3">
+                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-[250px]" />
+                      <Skeleton className="h-4 w-[200px]" />
                     </div>
                   </div>
-                </card>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  {news.headline && news.link && news.image && (
+                    <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                      <img
+                        src={news.image}
+                        className="rounded-t-lg"
+                        alt="image"
+                      />
+                      <div className="px-3 py-2 pb-4">
+                        <p
+                          style={{
+                            fontFamily: "'Noto Sans Devanagari', sans-serif",
+                          }}
+                          className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                        >
+                          {news.headline}
+                        </p>
+                        <div className="w-full">
+                          <Link to={`${news.link}`}>
+                            <Button
+                              variant=""
+                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                            >
+                              Read at Tech Pana
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </card>
+                  )}
+                </>
               )}
             </>
           ))}
@@ -175,39 +218,58 @@ const News = () => {
         {ekantiposts &&
           ekantiposts.map((news) => (
             <>
-              {news.headline && news.slug && news.link && news.image && (
-                <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
-                  <img src={news.image} className="rounded-t-lg" alt="image" />
-                  <div className="px-3 py-2 pb-4">
-                    <h2
-                      style={{
-                        fontFamily: "'Noto Sans Devanagari', sans-serif",
-                      }}
-                      className="text-lg text-stone-900 font-bold"
-                    >
-                      {news.headline}
-                    </h2>
-
-                    <p
-                      style={{
-                        fontFamily: "'Noto Sans Devanagari', sans-serif",
-                      }}
-                      className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
-                    >
-                      {news.slug}
-                    </p>
-                    <div className="w-full">
-                      <Link to={`${news.link}`}>
-                        <Button
-                          variant=""
-                          className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                        >
-                          Read at eKantipur
-                        </Button>
-                      </Link>
+              {loading ? (
+                <>
+                  {" "}
+                  <div className="flex justify-center items-center flex-col space-y-3">
+                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-[250px]" />
+                      <Skeleton className="h-4 w-[200px]" />
                     </div>
                   </div>
-                </card>
+                </>
+              ) : (
+                <>
+                  {news.headline && news.slug && news.link && news.image && (
+                    <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                      <img
+                        src={news.image}
+                        className="rounded-t-lg"
+                        alt="image"
+                      />
+                      <div className="px-3 py-2 pb-4">
+                        <h2
+                          style={{
+                            fontFamily: "'Noto Sans Devanagari', sans-serif",
+                          }}
+                          className="text-lg text-stone-900 font-bold"
+                        >
+                          {news.headline}
+                        </h2>
+
+                        <p
+                          style={{
+                            fontFamily: "'Noto Sans Devanagari', sans-serif",
+                          }}
+                          className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                        >
+                          {news.slug}
+                        </p>
+                        <div className="w-full">
+                          <Link to={`${news.link}`}>
+                            <Button
+                              variant=""
+                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                            >
+                              Read at eKantipur
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </card>
+                  )}
+                </>
               )}
             </>
           ))}

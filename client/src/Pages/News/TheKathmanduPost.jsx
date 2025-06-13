@@ -8,12 +8,15 @@ import {
 } from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const TheKathmanduPost = () => {
   const [newses, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getNews = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`
@@ -21,11 +24,13 @@ const TheKathmanduPost = () => {
         setNews(response.data.news);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false); // Stop loading
       }
     };
+
     getNews();
   }, []);
-
   return (
     <div className="">
       <div>
@@ -55,7 +60,7 @@ const TheKathmanduPost = () => {
           </TooltipContent>
         </Tooltip>
       </div>
-      <div className="flex flex-row w-full px-2 items-center justify-between">
+      {/* <div className="flex flex-row w-full px-2 items-center justify-between">
         <h2 className="bg-indigo-500 py-0 px-2 pr-3 text-sm font-semibold text-white rounded-r-full">
           Category
         </h2>
@@ -73,35 +78,54 @@ const TheKathmanduPost = () => {
             Health
           </Link>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
         {newses &&
           newses.map((news) => (
             <>
-              {news.headline && news.slug && news.link && news.image && (
-                <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
-                  <img src={news.image} className="rounded-t-lg" alt="image" />
-                  <div className="px-3 py-2 pb-4">
-                    <h2 className="text-lg text-stone-900 font-bold">
-                      {news.headline}
-                    </h2>
-
-                    <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
-                      {news.slug}
-                    </p>
-                    <div className="w-full">
-                      <Link to={`https://kathmandupost.com${news.link}`}>
-                        <Button
-                          variant=""
-                          className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                        >
-                          Read at The Kathmandu Post
-                        </Button>
-                      </Link>
+              {loading ? (
+                <>
+                  {" "}
+                  <div className="flex justify-center items-center flex-col space-y-3">
+                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-[250px]" />
+                      <Skeleton className="h-4 w-[200px]" />
                     </div>
                   </div>
-                </card>
+                </>
+              ) : (
+                <>
+                  {news.headline && news.slug && news.link && news.image && (
+                    <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                      <img
+                        src={news.image}
+                        className="rounded-t-lg"
+                        alt="image"
+                      />
+                      <div className="px-3 py-2 pb-4">
+                        <h2 className="text-lg text-stone-900 font-bold">
+                          {news.headline}
+                        </h2>
+
+                        <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
+                          {news.slug}
+                        </p>
+                        <div className="w-full">
+                          <Link to={`https://kathmandupost.com${news.link}`}>
+                            <Button
+                              variant=""
+                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                            >
+                              Read at The Kathmandu Post
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </card>
+                  )}
+                </>
               )}
             </>
           ))}
