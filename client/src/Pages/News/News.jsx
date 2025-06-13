@@ -70,7 +70,7 @@ const News = () => {
       {loading ? (
         <>
           {" "}
-          <div className="flex justify-center items-center flex-col space-y-3">
+          <div className="flex mb-3 justify-center items-center flex-col space-y-3">
             <Skeleton className="h-[125px] w-[250px] rounded-xl" />
             <div className="space-y-2">
               <Skeleton className="h-4 w-[250px]" />
