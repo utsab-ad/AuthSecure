@@ -11,9 +11,11 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const TechPana = () => {
   const [newses, setNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getNews = async () => {
+      setLoading(true);
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/news/techpana`
@@ -21,11 +23,13 @@ const TechPana = () => {
         setNews(response.data.news);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
+
     getNews();
   }, []);
-
   return (
     <div className="">
       <div>
@@ -77,30 +81,50 @@ const TechPana = () => {
         {newses &&
           newses.map((news) => (
             <>
-              {news.headline && news.link && news.image && (
-                <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
-                  <img src={news.image} className="rounded-t-lg" alt="image" />
-                  <div className="px-3 py-2 pb-4">
-                    <p
-                      style={{
-                        fontFamily: "'Noto Sans Devanagari', sans-serif",
-                      }}
-                      className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
-                    >
-                      {news.headline}
-                    </p>
-                    <div className="w-full">
-                      <Link to={`${news.link}`}>
-                        <Button
-                          variant=""
-                          className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                        >
-                          Read at Tech Pana
-                        </Button>
-                      </Link>
+              {loading ? (
+                <>
+                  {" "}
+                  <div className="flex justify-center items-center flex-col space-y-3">
+                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-[250px]" />
+                      <Skeleton className="h-4 w-[200px]" />
                     </div>
                   </div>
-                </card>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  {news.headline && news.link && news.image && (
+                    <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                      <img
+                        src={news.image}
+                        className="rounded-t-lg"
+                        alt="image"
+                      />
+                      <div className="px-3 py-2 pb-4">
+                        <p
+                          style={{
+                            fontFamily: "'Noto Sans Devanagari', sans-serif",
+                          }}
+                          className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                        >
+                          {news.headline}
+                        </p>
+                        <div className="w-full">
+                          <Link to={`${news.link}`}>
+                            <Button
+                              variant=""
+                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                            >
+                              Read at Tech Pana
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </card>
+                  )}
+                </>
               )}
             </>
           ))}

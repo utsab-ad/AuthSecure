@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Ekantipur = () => {
   const [newses, setNews] = useState([]);

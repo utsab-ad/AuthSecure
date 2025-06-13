@@ -25,7 +25,7 @@ const TheKathmanduPost = () => {
       } catch (error) {
         console.log(error);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
 
