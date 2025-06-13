@@ -20,7 +20,6 @@ const Layout = () => {
         <div className="w-full min-h-screen bg-gradient-to-br from-indigo-50 via-blue-200 text-gray-800 font-sans transition-colors duration-500">
           <SidebarTrigger className="md:hidden fixed top-0" />
           <Outlet />
-          <Footer/>
           {!isIndexRoute && (
             <button
               onClick={() => navigate(-1)}
@@ -49,6 +48,7 @@ const Layout = () => {
             </Link>
           )}
         </div>
+        <Footer />
       </main>
     </SidebarProvider>
   );
