@@ -37,7 +37,7 @@ const Layout = () => {
             </button>
           )}
           {!isChatbotRoute && (
-            <Link className="fixed bottom-2 right-2" to={RouteChatbot}>
+            <Link className="fixed bottom-10 right-2" to={RouteChatbot}>
               <Button
                 variant="outline"
                 className="dark:bg-green-400 bg-green-400 hover:bg-green-300 dark:hover:bg-green-300"
