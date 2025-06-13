@@ -12,23 +12,25 @@ import { IoIosArrowForward } from "react-icons/io";
 const Ekantipur = () => {
   const [newses, setNews] = useState([]);
 
-  try {
-    axios
-      .get(`${import.meta.env.VITE_API_BASE_URL}/news/ekantipur`)
-      .then((result) => {
-        setNews(result.data.news);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+  useEffect(() => {
+    const getNews = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/news/ekantipur`
+        );
+        setNews(response.data.news);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getNews();
+  }, []);
 
   return (
     <div className="">
       <div>
         <div className="p-4 flex justify-center items-center flex-col text-center">
-          <h1 className="text-2xl font-bold text-stone-800">
-            📰 eKantipur
-          </h1>
+          <h1 className="text-2xl font-bold text-stone-800">📰 eKantipur</h1>
           <p className="text-stone-500 text-sm max-w-xl">
             You can read latest <strong>news </strong> from{" "}
             <strong>eKantipur</strong> to stay informed.
@@ -56,7 +58,7 @@ const Ekantipur = () => {
         {newses &&
           newses.map((news) => (
             <>
-              {news.headline && news.slug && news.link && (
+              {news.headline && news.slug && news.image && news.link && (
                 <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
                   <h2
                     style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}

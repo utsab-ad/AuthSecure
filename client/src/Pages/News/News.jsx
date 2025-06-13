@@ -8,7 +8,11 @@ import {
 } from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
-import { RouteEkantipur, RouteKathmanduPost, RouteTechPana } from "@/helpers/RouteNames.js";
+import {
+  RouteEkantipur,
+  RouteKathmanduPost,
+  RouteTechPana,
+} from "@/helpers/RouteNames.js";
 
 const News = () => {
   const [newses, setNews] = useState([]);
@@ -16,28 +20,27 @@ const News = () => {
   const [techpanas, setTechPana] = useState([]);
   const [ekantiposts, setEkantipost] = useState([]);
 
-  try {
-    axios
-      .get(`${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`)
-      .then((ktmpost) => {
-        const topKtmPostNews = ktmpost.data.news.slice(0, 3);
-        setktmPost(topKtmPostNews);
-      });
-    axios
-      .get(`${import.meta.env.VITE_API_BASE_URL}/news/techpana`)
-      .then((techpana) => {
-        const toptechPana = techpana.data.news.slice(0, 3);
-        setTechPana(toptechPana);
-      });
-       axios
-      .get(`${import.meta.env.VITE_API_BASE_URL}/news/ekantipur`)
-      .then((ekantipur) => {
-        const topKanitpost = ekantipur.data.news.slice(0, 3);
-        setEkantipost(topKanitpost);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+    useEffect(() => {
+  const getNews = async () => {
+    try {
+      const ktmpost = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`);
+      const topKtmPostNews = ktmpost.data.news.slice(0, 3);
+      setktmPost(topKtmPostNews);
+
+      const techpana = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/news/techpana`);
+      const toptechPana = techpana.data.news.slice(0, 3);
+      setTechPana(toptechPana);
+
+      const ekantipur = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/news/ekantipur`);
+      const topKanitpost = ekantipur.data.news.slice(0, 3);
+      setEkantipost(topKanitpost);
+    } catch (error) {
+      console.error("Failed to fetch news:", error);
+    }
+  };
+
+  getNews();
+}, []);
 
   return (
     <div className="">
@@ -160,43 +163,43 @@ const News = () => {
           </TooltipContent>
         </Tooltip>
       </div>
-       <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
-              {ekantiposts &&
-                ekantiposts.map((news) => (
-                  <>
-                    {news.headline && news.slug && news.link && (
-                      <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
-                        <h2
-                          style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
-                          className="text-lg text-stone-900 font-bold"
-                        >
-                          {news.headline}
-                        </h2>
-                        <div className="">
-                          <img src={news.image} className="rounded-xl" alt="image" />
-                        </div>
-      
-                        <p
-                          style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
-                          className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
-                        >
-                          {news.slug}
-                        </p>
-                        <div className="w-full">
-                          <Link to={`${news.link}`}>
-                            <Button
-                              variant=""
-                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                            >
-                              Read at eKantipur
-                            </Button>
-                          </Link>
-                        </div>
-                      </card>
-                    )}
-                  </>
-                ))}
-            </div>
+      <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+        {ekantiposts &&
+          ekantiposts.map((news) => (
+            <>
+              {news.headline && news.slug && news.image && news.link && (
+                <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
+                  <h2
+                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
+                    className="text-lg text-stone-900 font-bold"
+                  >
+                    {news.headline}
+                  </h2>
+                  <div className="">
+                    <img src={news.image} className="rounded-xl" alt="image" />
+                  </div>
+
+                  <p
+                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
+                    className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                  >
+                    {news.slug}
+                  </p>
+                  <div className="w-full">
+                    <Link to={`${news.link}`}>
+                      <Button
+                        variant=""
+                        className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                      >
+                        Read at eKantipur
+                      </Button>
+                    </Link>
+                  </div>
+                </card>
+              )}
+            </>
+          ))}
+      </div>
     </div>
   );
 };

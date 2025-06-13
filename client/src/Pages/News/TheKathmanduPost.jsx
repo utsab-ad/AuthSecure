@@ -12,16 +12,19 @@ import { IoIosArrowForward } from "react-icons/io";
 const TheKathmanduPost = () => {
   const [newses, setNews] = useState([]);
 
-  try {
-    axios
-      .get(`${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`)
-      .then((result) => {
-        setNews(result.data.news);
-      });
-     
-  } catch (error) {
-    console.log(error);
-  }
+   useEffect(() => {
+      const getNews = async () => {
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`
+          );
+          setNews(response.data.news);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getNews();
+    }, []);
 
   return (
     <div className="">
