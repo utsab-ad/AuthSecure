@@ -12,19 +12,19 @@ import { IoIosArrowForward } from "react-icons/io";
 const TheKathmanduPost = () => {
   const [newses, setNews] = useState([]);
 
-   useEffect(() => {
-      const getNews = async () => {
-        try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`
-          );
-          setNews(response.data.news);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      getNews();
-    }, []);
+  useEffect(() => {
+    const getNews = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`
+        );
+        setNews(response.data.news);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getNews();
+  }, []);
 
   return (
     <div className="">
@@ -56,7 +56,9 @@ const TheKathmanduPost = () => {
         </Tooltip>
       </div>
       <div className="flex flex-row w-full px-2 items-center justify-between">
-        <h2 className="bg-indigo-500 py-0 px-2 pr-3 text-sm font-semibold text-white rounded-r-full">Category</h2>
+        <h2 className="bg-indigo-500 py-0 px-2 pr-3 text-sm font-semibold text-white rounded-r-full">
+          Category
+        </h2>
         <div className="flex gap-2 grid grid-cols-2 md:grid-cols-4 sm:grid-cols-3">
           <Link className="rounded-lg border-1 border-black text-sm hover:bg-gray-300 flex items-center justify-center py-0 px-2 ">
             National
@@ -78,26 +80,26 @@ const TheKathmanduPost = () => {
           newses.map((news) => (
             <>
               {news.headline && news.slug && news.link && news.image && (
-                <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
-                  <h2 className="text-lg text-stone-900 font-bold">
-                    {news.headline}
-                  </h2>
-                  <div className="">
-                    <img src={news.image} className="rounded-xl" alt="image" />
-                  </div>
+                <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                  <img src={news.image} className="rounded-t-lg" alt="image" />
+                  <div className="px-3 py-2 pb-4">
+                    <h2 className="text-lg text-stone-900 font-bold">
+                      {news.headline}
+                    </h2>
 
-                  <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
-                    {news.slug}
-                  </p>
-                  <div className="w-full">
-                    <Link to={`https://kathmandupost.com${news.link}`}>
-                      <Button
-                        variant=""
-                        className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                      >
-                        Read at The Kathmandu Post
-                      </Button>
-                    </Link>
+                    <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
+                      {news.slug}
+                    </p>
+                    <div className="w-full">
+                      <Link to={`https://kathmandupost.com${news.link}`}>
+                        <Button
+                          variant=""
+                          className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                        >
+                          Read at The Kathmandu Post
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </card>
               )}

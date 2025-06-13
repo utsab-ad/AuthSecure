@@ -20,27 +20,33 @@ const News = () => {
   const [techpanas, setTechPana] = useState([]);
   const [ekantiposts, setEkantipost] = useState([]);
 
-    useEffect(() => {
-  const getNews = async () => {
-    try {
-      const ktmpost = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`);
-      const topKtmPostNews = ktmpost.data.news.slice(0, 3);
-      setktmPost(topKtmPostNews);
+  useEffect(() => {
+    const getNews = async () => {
+      try {
+        const ktmpost = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`
+        );
+        const topKtmPostNews = ktmpost.data.news.slice(0, 3);
+        setktmPost(topKtmPostNews);
 
-      const techpana = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/news/techpana`);
-      const toptechPana = techpana.data.news.slice(0, 3);
-      setTechPana(toptechPana);
+        const techpana = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/news/techpana`
+        );
+        const toptechPana = techpana.data.news.slice(0, 3);
+        setTechPana(toptechPana);
 
-      const ekantipur = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/news/ekantipur`);
-      const topKanitpost = ekantipur.data.news.slice(0, 3);
-      setEkantipost(topKanitpost);
-    } catch (error) {
-      console.error("Failed to fetch news:", error);
-    }
-  };
+        const ekantipur = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/news/ekantipur`
+        );
+        const topKanitpost = ekantipur.data.news.slice(0, 3);
+        setEkantipost(topKanitpost);
+      } catch (error) {
+        console.error("Failed to fetch news:", error);
+      }
+    };
 
-  getNews();
-}, []);
+    getNews();
+  }, []);
 
   return (
     <div className="">
@@ -78,26 +84,26 @@ const News = () => {
           ktmposts.map((news) => (
             <>
               {news.headline && news.slug && news.link && news.image && (
-                <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
-                  <h2 className="text-lg text-stone-900 font-bold">
-                    {news.headline}
-                  </h2>
-                  <div className="">
-                    <img src={news.image} className="rounded-xl" alt="image" />
-                  </div>
+                <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                  <img src={news.image} className="rounded-t-lg" alt="image" />
+                  <div className="px-3 py-2 pb-4">
+                    <h2 className="text-lg text-stone-900 font-bold">
+                      {news.headline}
+                    </h2>
 
-                  <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
-                    {news.slug}
-                  </p>
-                  <div className="w-full">
-                    <Link to={`https://kathmandupost.com${news.link}`}>
-                      <Button
-                        variant=""
-                        className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                      >
-                        Read at The Kathmandu Post
-                      </Button>
-                    </Link>
+                    <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
+                      {news.slug}
+                    </p>
+                    <div className="w-full">
+                      <Link to={`https://kathmandupost.com${news.link}`}>
+                        <Button
+                          variant=""
+                          className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                        >
+                          Read at The Kathmandu Post
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </card>
               )}
@@ -122,27 +128,29 @@ const News = () => {
         {techpanas &&
           techpanas.map((news) => (
             <>
-              {news.headline && news.link && news.image && (
-                <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
-                  <div className="">
-                    <img src={news.image} className="rounded-xl" alt="image" />
-                  </div>
+               {news.headline && news.link && news.image && (
+                <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                  <img src={news.image} className="rounded-t-lg" alt="image" />
+                  <div className="px-3 py-2 pb-4">
 
-                  <p
-                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
-                    className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
-                  >
-                    {news.headline}
-                  </p>
-                  <div className="w-full">
-                    <Link to={`${news.link}`}>
-                      <Button
-                        variant=""
-                        className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                      >
-                        Read at Tech Pana
-                      </Button>
-                    </Link>
+                    <p
+                      style={{
+                        fontFamily: "'Noto Sans Devanagari', sans-serif",
+                      }}
+                      className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                    >
+                      {news.headline}
+                    </p>
+                    <div className="w-full">
+                      <Link to={`${news.link}`}>
+                        <Button
+                          variant=""
+                          className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                        >
+                          Read at Tech Pana
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </card>
               )}
@@ -167,33 +175,37 @@ const News = () => {
         {ekantiposts &&
           ekantiposts.map((news) => (
             <>
-              {news.headline && news.slug && news.image && news.link && (
-                <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
-                  <h2
-                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
-                    className="text-lg text-stone-900 font-bold"
-                  >
-                    {news.headline}
-                  </h2>
-                  <div className="">
-                    <img src={news.image} className="rounded-xl" alt="image" />
-                  </div>
+              {news.headline && news.slug && news.link && news.image && (
+                <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                  <img src={news.image} className="rounded-t-lg" alt="image" />
+                  <div className="px-3 py-2 pb-4">
+                    <h2
+                      style={{
+                        fontFamily: "'Noto Sans Devanagari', sans-serif",
+                      }}
+                      className="text-lg text-stone-900 font-bold"
+                    >
+                      {news.headline}
+                    </h2>
 
-                  <p
-                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
-                    className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
-                  >
-                    {news.slug}
-                  </p>
-                  <div className="w-full">
-                    <Link to={`${news.link}`}>
-                      <Button
-                        variant=""
-                        className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                      >
-                        Read at eKantipur
-                      </Button>
-                    </Link>
+                    <p
+                      style={{
+                        fontFamily: "'Noto Sans Devanagari', sans-serif",
+                      }}
+                      className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                    >
+                      {news.slug}
+                    </p>
+                    <div className="w-full">
+                      <Link to={`${news.link}`}>
+                        <Button
+                          variant=""
+                          className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                        >
+                          Read at eKantipur
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </card>
               )}
