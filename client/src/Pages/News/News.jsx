@@ -32,17 +32,16 @@ const News = () => {
         const topKtmPostNews = ktmpost.data.news.slice(0, 3);
         setktmPost(topKtmPostNews);
 
-        const techpana = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}/news/techpana`
-        );
-        const toptechPana = techpana.data.news.slice(0, 3);
-        setTechPana(toptechPana);
-
         const ekantipur = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/news/ekantipur`
         );
         const topKanitpost = ekantipur.data.news.slice(0, 3);
         setEkantipost(topKanitpost);
+        const techpana = await axios.get(
+          `${import.meta.env.VITE_API_BASE_URL}/news/techpana`
+        );
+        const toptechPana = techpana.data.news.slice(0, 3);
+        setTechPana(toptechPana);
       } catch (error) {
         console.log(error);
       } finally {
@@ -67,39 +66,56 @@ const News = () => {
           </p>
         </div>
       </div>
-      <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
-        <h2 className="text-sm font-semibold text-gray-300">
-          The Kathmandu Post
-        </h2>
 
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link to={RouteKathmanduPost} className="text-gray-300 font-bold">
-              <IoIosArrowForward size={24} />
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>The Kathmandu Post</p>
-          </TooltipContent>
-        </Tooltip>
-      </div>
+      {loading ? (
+        <>
+          {" "}
+          <div className="flex justify-center items-center flex-col space-y-3">
+            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[200px]" />
+            </div>
+          </div>
+          <div className="flex justify-center items-center flex-col space-y-3">
+            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[200px]" />
+            </div>
+          </div>
+          <div className="flex justify-center items-center flex-col space-y-3">
+            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-[250px]" />
+              <Skeleton className="h-4 w-[200px]" />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
+            <h2 className="text-sm font-semibold text-gray-300">
+              The Kathmandu Post
+            </h2>
 
-      <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
-        {ktmposts &&
-          ktmposts.map((news) => (
-            <>
-              {loading ? (
-                <>
-                  {" "}
-                  <div className="flex justify-center items-center flex-col space-y-3">
-                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-[250px]" />
-                      <Skeleton className="h-4 w-[200px]" />
-                    </div>
-                  </div>
-                </>
-              ) : (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  to={RouteKathmanduPost}
+                  className="text-gray-300 font-bold"
+                >
+                  <IoIosArrowForward size={24} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>The Kathmandu Post</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+            {ktmposts &&
+              ktmposts.map((news) => (
                 <>
                   {news.headline && news.slug && news.link && news.image && (
                     <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
@@ -130,106 +146,25 @@ const News = () => {
                     </card>
                   )}
                 </>
-              )}
-            </>
-          ))}
-      </div>
-      <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
-        <h2 className="text-sm font-semibold text-gray-300">Tech Pana</h2>
+              ))}
+          </div>
+          <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
+            <h2 className="text-sm font-semibold text-gray-300">eKantipur</h2>
 
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link to={RouteTechPana} className="text-gray-300 font-bold">
-              <IoIosArrowForward size={24} />
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Tech Pana</p>
-          </TooltipContent>
-        </Tooltip>
-      </div>
-      <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
-        {techpanas &&
-          techpanas.map((news) => (
-            <>
-              {loading ? (
-                <>
-                  {" "}
-                  <div className="flex justify-center items-center flex-col space-y-3">
-                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-[250px]" />
-                      <Skeleton className="h-4 w-[200px]" />
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {" "}
-                  {news.headline && news.link && news.image && (
-                    <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
-                      <img
-                        src={news.image}
-                        className="rounded-t-lg"
-                        alt="image"
-                      />
-                      <div className="px-3 py-2 pb-4">
-                        <p
-                          style={{
-                            fontFamily: "'Noto Sans Devanagari', sans-serif",
-                          }}
-                          className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
-                        >
-                          {news.headline}
-                        </p>
-                        <div className="w-full">
-                          <Link to={`${news.link}`}>
-                            <Button
-                              variant=""
-                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                            >
-                              Read at Tech Pana
-                            </Button>
-                          </Link>
-                        </div>
-                      </div>
-                    </card>
-                  )}
-                </>
-              )}
-            </>
-          ))}
-      </div>
-      <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
-        <h2 className="text-sm font-semibold text-gray-300">eKantipur</h2>
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Link to={RouteEkantipur} className="text-gray-300 font-bold">
-              <IoIosArrowForward size={24} />
-            </Link>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>eKantipur</p>
-          </TooltipContent>
-        </Tooltip>
-      </div>
-      <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
-        {ekantiposts &&
-          ekantiposts.map((news) => (
-            <>
-              {loading ? (
-                <>
-                  {" "}
-                  <div className="flex justify-center items-center flex-col space-y-3">
-                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-[250px]" />
-                      <Skeleton className="h-4 w-[200px]" />
-                    </div>
-                  </div>
-                </>
-              ) : (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link to={RouteEkantipur} className="text-gray-300 font-bold">
+                  <IoIosArrowForward size={24} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>eKantipur</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+          <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+            {ekantiposts &&
+              ekantiposts.map((news) => (
                 <>
                   {news.headline && news.slug && news.link && news.image && (
                     <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
@@ -270,10 +205,61 @@ const News = () => {
                     </card>
                   )}
                 </>
-              )}
-            </>
-          ))}
-      </div>
+              ))}
+          </div>
+          <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
+            <h2 className="text-sm font-semibold text-gray-300">Tech Pana</h2>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link to={RouteTechPana} className="text-gray-300 font-bold">
+                  <IoIosArrowForward size={24} />
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Tech Pana</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+
+          <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+            {techpanas &&
+              techpanas.map((news) => (
+                <>
+                  {news.headline && news.link && news.image && (
+                    <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+                      <img
+                        src={news.image}
+                        className="rounded-t-lg"
+                        alt="image"
+                      />
+                      <div className="px-3 py-2 pb-4">
+                        <p
+                          style={{
+                            fontFamily: "'Noto Sans Devanagari', sans-serif",
+                          }}
+                          className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                        >
+                          {news.headline}
+                        </p>
+                        <div className="w-full">
+                          <Link to={`${news.link}`}>
+                            <Button
+                              variant=""
+                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                            >
+                              Read at Tech Pana
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                    </card>
+                  )}
+                </>
+              ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

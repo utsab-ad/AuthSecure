@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const TechPana = () => {
   const [newses, setNews] = useState([]);
@@ -78,23 +79,36 @@ const TechPana = () => {
       </div> */}
 
       <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
-        {newses &&
-          newses.map((news) => (
-            <>
-              {loading ? (
+        {loading ? (
+          <>
+            {" "}
+            <div className="flex justify-center items-center flex-col space-y-3">
+              <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-4 w-[200px]" />
+              </div>
+            </div>
+            <div className="flex justify-center items-center flex-col space-y-3">
+              <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-4 w-[200px]" />
+              </div>
+            </div>
+            <div className="flex justify-center items-center flex-col space-y-3">
+              <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-4 w-[200px]" />
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            {newses &&
+              newses.map((news) => (
                 <>
-                  {" "}
-                  <div className="flex justify-center items-center flex-col space-y-3">
-                    <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-[250px]" />
-                      <Skeleton className="h-4 w-[200px]" />
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  {" "}
                   {news.headline && news.link && news.image && (
                     <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
                       <img
@@ -125,9 +139,9 @@ const TechPana = () => {
                     </card>
                   )}
                 </>
-              )}
-            </>
-          ))}
+              ))}
+          </>
+        )}
       </div>
     </div>
   );
