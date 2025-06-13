@@ -1,8 +1,10 @@
 import express from "express";
-import { GetNews } from "../controllers/News.controllers.js";
+import { GeteKantipur, GetKathmanduPost, GetTechPana } from "../controllers/News.controllers.js";
 
 const NewsRoute = express.Router();
 
-NewsRoute.get("/new", GetNews);
+NewsRoute.get("/ktmpost", GetKathmanduPost);
+NewsRoute.get("/techpana", GetTechPana);
+NewsRoute.get("/ekantipur", GeteKantipur);
 
 export default NewsRoute;

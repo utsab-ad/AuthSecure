@@ -30,4 +30,7 @@ export const RouteDocs = "/docs"
 
 
 //News
-export const RouteNews = "/news@kathmandupost"
+export const RouteNews = "/stayupdated"
+export const RouteKathmanduPost = "/stayupdated/kathmandupost"
+export const RouteTechPana = "/stayupdated/techpana"
+export const RouteEkantipur = "/stayupdated/ekantipur"

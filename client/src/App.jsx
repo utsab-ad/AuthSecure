@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import { RouteAdminSignin, RouteChatbot, RouteDocs, RouteIndex, RouteNews } from "./helpers/RouteNames";
+import { RouteAdminSignin, RouteChatbot, RouteDocs, RouteEkantipur, RouteIndex, RouteKathmanduPost, RouteNews, RouteTechPana } from "./helpers/RouteNames";
 import Index from "./Pages/Index";
 import Chatbot from "./Pages/chatbot/Chatbot";
 import Layout from "./Pages/Layout/Layout";
@@ -10,6 +10,9 @@ import AdminSignin from "./Pages/AdminSignin";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import News from "./Pages/News/News";
 import Page_404 from "./Pages/Page_404.jsx";
+import TheKathmanduPost from "./Pages/News/TheKathmanduPost";
+import TechPana from "./Pages/News/TechPana";
+import Ekantipur from "./Pages/News/Ekantipur";
 
 function App() {
    const GoogleAuthWrapper = () => {
@@ -28,6 +31,9 @@ function App() {
         <Route path={RouteDocs} element={<Docs/>}></Route>
         <Route path={RouteAdminSignin} element={<GoogleAuthWrapper/>}></Route>
         <Route path={RouteNews} element={<News/>}></Route>
+        <Route path={RouteTechPana} element={<TechPana/>}></Route>
+        <Route path={RouteKathmanduPost} element={<TheKathmanduPost/>}></Route>
+        <Route path={RouteEkantipur} element={<Ekantipur/>}></Route>
         </Route>
         <Route path="*" element={<Page_404/>}></Route>
       </Routes>

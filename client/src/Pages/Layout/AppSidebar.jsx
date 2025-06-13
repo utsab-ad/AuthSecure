@@ -18,10 +18,11 @@ import { FiUsers } from "react-icons/fi";
 import { GoDot } from "react-icons/go";
 import { FcAbout } from "react-icons/fc";
 import { GrProjects } from "react-icons/gr";
-import { RouteAdminSignin, RouteDocs, RouteIndex } from "@/helpers/RouteNames";
+import { RouteAdminSignin, RouteDocs, RouteIndex, RouteNews } from "@/helpers/RouteNames";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { IoIosLogIn } from "react-icons/io";
+import { FaRegNewspaper } from "react-icons/fa";
 
 const AppSidebar = () => {
   return (
@@ -85,6 +86,14 @@ const AppSidebar = () => {
                 <Link>new cate</Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
+             <Link to={RouteNews}>
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <FaRegNewspaper className="cursor-pointer" />
+                  <p className="cursor-pointer w-full">Stay Updated</p>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </Link>
 
             <SidebarMenuItem>
               <SidebarMenuButton>

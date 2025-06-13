@@ -2,24 +2,38 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Link } from "react-router-dom";
+import { IoIosArrowForward } from "react-icons/io";
+import { RouteEkantipur, RouteKathmanduPost, RouteTechPana } from "@/helpers/RouteNames.js";
 
 const News = () => {
   const [newses, setNews] = useState([]);
+  const [ktmposts, setktmPost] = useState([]);
+  const [techpanas, setTechPana] = useState([]);
+  const [ekantiposts, setEkantipost] = useState([]);
 
   try {
     axios
-      .get(`${import.meta.env.VITE_API_BASE_URL}/news/new`)
-      .then((result) => {
-        setNews(result.data.news);
+      .get(`${import.meta.env.VITE_API_BASE_URL}/news/ktmpost`)
+      .then((ktmpost) => {
+        const topKtmPostNews = ktmpost.data.news.slice(0, 3);
+        setktmPost(topKtmPostNews);
+      });
+    axios
+      .get(`${import.meta.env.VITE_API_BASE_URL}/news/techpana`)
+      .then((techpana) => {
+        const toptechPana = techpana.data.news.slice(0, 3);
+        setTechPana(toptechPana);
+      });
+       axios
+      .get(`${import.meta.env.VITE_API_BASE_URL}/news/ekantipur`)
+      .then((ekantipur) => {
+        const topKanitpost = ekantipur.data.news.slice(0, 3);
+        setEkantipost(topKanitpost);
       });
   } catch (error) {
     console.log(error);
@@ -38,67 +52,151 @@ const News = () => {
             headlines.
           </p>
         </div>
+      </div>
+      <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
+        <h2 className="text-sm font-semibold text-gray-300">
+          The Kathmandu Post
+        </h2>
 
-        <div className="px-4 flex justify-evenly items-center pb-3">
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select Source" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Source</SelectLabel>
-                <SelectItem value="apple">Kantipur</SelectItem>
-                <SelectItem value="banana">The Kathmandu Post</SelectItem>
-                <SelectItem value="blueberry">BBC</SelectItem>
-                <SelectItem value="grapes">GorkhaPatra</SelectItem>
-                <SelectItem value="pineapple">Other</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Select Category" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Category</SelectLabel>
-                <SelectItem value="apple">National</SelectItem>
-                <SelectItem value="banana">Sports</SelectItem>
-                <SelectItem value="blueberry">Tech</SelectItem>
-                <SelectItem value="grapes">Political</SelectItem>
-                <SelectItem value="pineapple">Other</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link to={RouteKathmanduPost} className="text-gray-300 font-bold">
+              <IoIosArrowForward size={24} />
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>The Kathmandu Post</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
 
-      <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-center gap-3 pt-5 flex-col mx-auto">
-        {newses &&
-          newses.map(news => <>
-           {news.headline && news.slug && news.link && news.image &&  <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
-              <h2 className="text-lg text-stone-900 font-bold">
-                {news.headline}
-              </h2>
-              <div className="">
-                <img src={news.image} className="rounded-xl" alt="image" />
-              </div>
+      <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+        {ktmposts &&
+          ktmposts.map((news) => (
+            <>
+              {news.headline && news.slug && news.link && news.image && (
+                <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
+                  <h2 className="text-lg text-stone-900 font-bold">
+                    {news.headline}
+                  </h2>
+                  <div className="">
+                    <img src={news.image} className="rounded-xl" alt="image" />
+                  </div>
 
-              <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
-                {news.slug}
-              </p>
-              <div className="w-full">
-                <Link to={`https://kathmandupost.com${news.link}`}>
-                <Button
-                  variant=""
-                  className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                >
-                  Read at The Kathmandu Post
-                </Button></Link>
-              </div>
-            </card>}
-          </>)}
+                  <p className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500">
+                    {news.slug}
+                  </p>
+                  <div className="w-full">
+                    <Link to={`https://kathmandupost.com${news.link}`}>
+                      <Button
+                        variant=""
+                        className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                      >
+                        Read at The Kathmandu Post
+                      </Button>
+                    </Link>
+                  </div>
+                </card>
+              )}
+            </>
+          ))}
       </div>
+      <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
+        <h2 className="text-sm font-semibold text-gray-300">Tech Pana</h2>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link to={RouteTechPana} className="text-gray-300 font-bold">
+              <IoIosArrowForward size={24} />
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Tech Pana</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+      <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+        {techpanas &&
+          techpanas.map((news) => (
+            <>
+              {news.headline && news.link && news.image && (
+                <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
+                  <div className="">
+                    <img src={news.image} className="rounded-xl" alt="image" />
+                  </div>
+
+                  <p
+                    style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
+                    className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                  >
+                    {news.headline}
+                  </p>
+                  <div className="w-full">
+                    <Link to={`${news.link}`}>
+                      <Button
+                        variant=""
+                        className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                      >
+                        Read at Tech Pana
+                      </Button>
+                    </Link>
+                  </div>
+                </card>
+              )}
+            </>
+          ))}
+      </div>
+      <div className="w-full flex flex-row items-center justify-between bg-stone-900 py-1 px-2">
+        <h2 className="text-sm font-semibold text-gray-300">eKantipur</h2>
+
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link to={RouteEkantipur} className="text-gray-300 font-bold">
+              <IoIosArrowForward size={24} />
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>eKantipur</p>
+          </TooltipContent>
+        </Tooltip>
+      </div>
+       <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+              {ekantiposts &&
+                ekantiposts.map((news) => (
+                  <>
+                    {news.headline && news.slug && news.link && (
+                      <card className="flex flex-col border bg-white rounded-lg mx-auto p-3 max-w-100">
+                        <h2
+                          style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
+                          className="text-lg text-stone-900 font-bold"
+                        >
+                          {news.headline}
+                        </h2>
+                        <div className="">
+                          <img src={news.image} className="rounded-xl" alt="image" />
+                        </div>
+      
+                        <p
+                          style={{ fontFamily: "'Noto Sans Devanagari', sans-serif" }}
+                          className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                        >
+                          {news.slug}
+                        </p>
+                        <div className="w-full">
+                          <Link to={`${news.link}`}>
+                            <Button
+                              variant=""
+                              className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
+                            >
+                              Read at eKantipur
+                            </Button>
+                          </Link>
+                        </div>
+                      </card>
+                    )}
+                  </>
+                ))}
+            </div>
     </div>
   );
 };
