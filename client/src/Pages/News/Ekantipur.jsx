@@ -83,50 +83,52 @@ const Ekantipur = () => {
           </div>
         </div>
       ) : (
-        <div className="flex pb-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 px-3 justify-center items-start gap-3 pt-5 flex-col mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 py-6 max-w-7xl mx-auto">
           {newses &&
-            newses.map((news) => (
-              <>
-                {news.headline && news.slug && news.link && news.image && (
-                  <card className="flex flex-col border bg-white rounded-lg mx-auto max-w-100">
+            newses.map(
+              (news) =>
+                news.headline &&
+                news.slug &&
+                news.link &&
+                news.image && (
+                  <div
+                    key={news.slug}
+                    className="flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                  >
                     <img
                       src={news.image}
-                      className="rounded-t-lg"
-                      alt="image"
+                      alt="News Image"
+                      className="w-full h-48 object-cover"
                     />
-                    <div className="px-3 py-2 pb-4">
+                    <div className="p-4 flex flex-col justify-between h-full">
                       <h2
                         style={{
                           fontFamily: "'Noto Sans Devanagari', sans-serif",
                         }}
-                        className="text-lg text-stone-900 font-bold"
+                        className="text-xl font-semibold text-gray-800 mb-2"
                       >
                         {news.headline}
                       </h2>
-
                       <p
                         style={{
                           fontFamily: "'Noto Sans Devanagari', sans-serif",
                         }}
-                        className="border-l-3 pl-2 my-2 border-green-600 py-2 text-sm font-bold text-stone-500"
+                        className="text-sm text-gray-500 border-l-4 border-green-600 pl-3 mb-4"
                       >
                         {news.slug}
                       </p>
-                      <div className="w-full">
-                        <Link to={`${news.link}`}>
-                          <Button
-                            variant=""
-                            className="w-full bg-blue-700 text-white hover:bg-blue-600 cursor-pointer"
-                          >
-                            Read at eKantipur
-                          </Button>
-                        </Link>
-                      </div>
+                      <Link
+                        to={`https://kathmandupost.com${news.link}`}
+                        className="mt-auto"
+                      >
+                        <button className="w-full bg-blue-700 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300">
+                          Read at The Kathmandu Post
+                        </button>
+                      </Link>
                     </div>
-                  </card>
-                )}
-              </>
-            ))}
+                  </div>
+                )
+            )}
         </div>
       )}
     </div>

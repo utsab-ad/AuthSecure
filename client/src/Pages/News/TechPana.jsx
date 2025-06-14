@@ -19,7 +19,8 @@ const TechPana = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_BASE_URL}/news/techpana`
+          `${import.meta.env.VITE_API_BASE_URL}/news/techpana`,
+          {withCredentials: true}
         );
         setNews(response.data.news);
       } catch (error) {
