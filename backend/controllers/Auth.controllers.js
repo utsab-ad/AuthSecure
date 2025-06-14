@@ -3,6 +3,7 @@ import Admin from "../models/Admin.model.js";
 import oauth2client from "../utils/oauth/googleConfig.js";
 import { generateAccessToken } from "../utils/tokens/generateTokens.js";
 import bcrypt from "bcrypt";
+import Client from "../models/Client.model.js";
 
 export const LoginAdminGoogle = async (req, res, next) => {
   try {
@@ -58,16 +59,6 @@ export const LoginAdminGoogle = async (req, res, next) => {
   }
 };
 
-export const LoginAdmin = async (req, res, next) => {
-  try {
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: ["Internal Server Error".error.message],
-    });
-  }
-};
-
 export const LoginClientGoogle = async (req, res, next) => {
   try {
   } catch (error) {
@@ -80,10 +71,68 @@ export const LoginClientGoogle = async (req, res, next) => {
 
 export const LoginClient = async (req, res, next) => {
   try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "ALl fields are required",
+      });
+    }
+
+    if (password.length < 5) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be 5 char long",
+      });
+    }
+
+    const client = await Client.findOne({ email });
+
+    if (!client) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const hashedPassword = await client.password;
+    const matchPassword = await bcrypt.compare(password, hashedPassword);
+
+    if (!matchPassword) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid Password",
+      });
+    }
+
+    const maxAge = 3 * 24 * 60 * 60;
+
+    const clientToken = await generateAccessToken(client, maxAge);
+
+    if (!clientToken) {
+      return res.status(500).json({
+        success: false,
+        message: "Token is not created",
+      });
+    }
+
+    res.cookie("client_jwt", clientToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: maxAge * 1000,
+    });
+
+    res.status(201).json({
+      success: true,
+      messsage: "Logged In Successfuly",
+      clientToken,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: ["Internal Server Error".error.message],
+      message: "Internal Server Error",
     });
   }
 };
@@ -98,7 +147,7 @@ export const Logout = async (req, res, next) => {
   }
 };
 
-export const Register = async (req, res, next) => {
+export const ClientRegister = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
@@ -109,9 +158,16 @@ export const Register = async (req, res, next) => {
       });
     }
 
-    const existingUser = await Admin.findOne({ email });
+    if (password.length < 5) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be 5 char long",
+      });
+    }
 
-    if (existingUser) {
+    const existingClient = await Client.findOne({ email });
+
+    if (existingClient) {
       return res.status(409).json({
         success: false,
         message: "User already exists",
@@ -120,13 +176,13 @@ export const Register = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await Admin.create({
+    const newClient = await Client.create({
       name,
       email,
       password: hashedPassword,
     });
 
-    if (!newUser) {
+    if (!newClient) {
       return res.status(500).json({
         success: false,
         message: ["User not created", error],
@@ -135,19 +191,26 @@ export const Register = async (req, res, next) => {
 
     const maxAge = 3 * 24 * 60 * 60;
 
-    const accessToken = generateAccessToken(newUser, maxAge);
+    const clientToken = await generateAccessToken(newClient, maxAge);
 
-    res.cookie("access_token", accessToken, {
+    if (!clientToken) {
+      return res.status(500).json({
+        success: false,
+        message: "Token is not created",
+      });
+    }
+
+    res.cookie("client_jwt", clientToken, {
       httpOnly: true,
       secure: true,
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: maxAge * 1000,
     });
 
     res.status(201).json({
       success: true,
-      message: "User created Successfully",
-      user: newUser.name,
+      messsage: "Register & Logged In Successfuly",
+      clientToken,
     });
   } catch (error) {
     return res.status(500).json({
@@ -157,7 +220,7 @@ export const Register = async (req, res, next) => {
   }
 };
 
-export const Login = async (req, res, next) => {
+export const LoginAdmin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -168,12 +231,19 @@ export const Login = async (req, res, next) => {
       });
     }
 
+    if (password.length < 5) {
+      return res.status(400).json({
+        success: false,
+        message: "Password must be 5 char long",
+      });
+    }
+
     const admin = await Admin.findOne({ email });
 
     if (!admin) {
       return res.status(404).json({
         success: false,
-        message: "User not found",
+        message: "Admin not found",
       });
     }
 
@@ -189,16 +259,16 @@ export const Login = async (req, res, next) => {
 
     const maxAge = 3 * 24 * 60 * 60;
 
-    const accessToken = await generateAccessToken(admin, maxAge);
+    const adminToken = await generateAccessToken(admin, maxAge);
 
-    if (!accessToken) {
+    if (!adminToken) {
       return res.status(500).json({
         success: false,
         message: "Token is not created",
       });
     }
-    
-    res.cookie("jwt", accessToken, {
+
+    res.cookie("admin_jwt", adminToken, {
       httpOnly: true,
       secure: true,
       sameSite: "None",
@@ -208,7 +278,7 @@ export const Login = async (req, res, next) => {
     res.status(201).json({
       success: true,
       messsage: "Logged In Successfuly",
-      accessToken,
+      adminToken,
     });
   } catch (error) {
     res.status(500).json({

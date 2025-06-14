@@ -1,6 +1,7 @@
 export const RouteIndex = "/"
 export const RouteAdminSignin = "/auth/admin"
-export const RouteClientSignin = "/auth/client"
+export const RouteClientSignin = "/auth/client/login"
+export const RouteClientSignup = "/auth/client/signup"
 
 //Blog Routes
 export const RouteBlogs = "/content/blogs"

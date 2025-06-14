@@ -1,10 +1,11 @@
 import express from "express";
-import { Login, LoginAdminGoogle, Register } from "../controllers/Auth.controllers.js";
+import {LoginAdmin, LoginAdminGoogle, ClientRegister, LoginClient } from "../controllers/Auth.controllers.js";
 
 const AuthRoute = express.Router();
 
 AuthRoute.get("/admin", LoginAdminGoogle);
-AuthRoute.post("/register", Register);
-AuthRoute.post("/login", Login);
+AuthRoute.post("/register/client", ClientRegister);
+AuthRoute.post("/login/admin", LoginAdmin);
+AuthRoute.post("/login/client", LoginClient);
 
 export default AuthRoute;
