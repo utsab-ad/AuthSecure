@@ -8,6 +8,7 @@ import ConnectDB from "./db/ConnectDB.db.js";
 import AuthRoute from "./routes/Auth.routes.js";
 import NewsRoute from "./routes/News.routes.js";
 import HiremeRoute from "./routes/Hireme.routes.js";
+import ProgressRoute from "./routes/Progress.routes.js";
 
 dotenv.config();
 
@@ -44,6 +45,7 @@ app.use("/test", ChatbotRoute);
 app.use("/auth", AuthRoute);
 app.use("/news", NewsRoute);
 app.use("/hireme", HiremeRoute)
+app.use("/progress", ProgressRoute)
 
 //listining
 

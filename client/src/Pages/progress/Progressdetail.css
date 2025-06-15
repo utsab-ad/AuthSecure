@@ -1,0 +1,47 @@
+/* src/pages/ProgressDetail.css */
+.progress-wrapper {
+  background: #f1f5f9; /* slate-100 */
+  border-radius: 0.75rem;
+  padding: 2rem;
+}
+
+.progress-article {
+  background-color: #f8fafc; /* light background */
+  color: #1e293b; /* slate-800 for text */
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+}
+
+.progress-article pre,
+.progress-article code {
+  background: #0f172a; /* dark background for code */
+  color: #f8fafc;
+  padding: 0.4rem 0.6rem;
+  border-radius: 0.25rem;
+  font-family: "Fira Code", monospace;
+  font-size: 0.9rem;
+  overflow-x: auto;
+}
+
+.progress-article h2,
+.progress-article h3 {
+  margin-top: 1.5rem;
+  color: #1d4ed8; /* blue-700 */
+}
+
+.progress-article ul,
+.progress-article ol {
+  margin-left: 1.5rem;
+  list-style: disc;
+}
+
+.progress-article blockquote {
+  border-left: 4px solid #64748b;
+  padding-left: 1rem;
+  font-style: italic;
+  color: #475569;
+}

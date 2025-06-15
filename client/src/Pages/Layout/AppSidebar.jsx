@@ -18,13 +18,21 @@ import { FiUsers } from "react-icons/fi";
 import { GoDot } from "react-icons/go";
 import { FcAbout } from "react-icons/fc";
 import { GrProjects } from "react-icons/gr";
-import { RouteAdminSignin, RouteDocs, RouteIndex, RouteNews } from "@/helpers/RouteNames";
+import {
+  RouteAdminSignin,
+  RouteDocs,
+  RouteIndex,
+  RouteNews,
+  RouteProgress,
+} from "@/helpers/RouteNames";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { IoIosLogIn } from "react-icons/io";
 import { FaRegNewspaper } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const AppSidebar = () => {
+  const isAdmin = useSelector((state) => state.admin.isAdmin);
   return (
     <Sidebar>
       <SidebarContent className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-white transition-transform duration-300 ease-in-out">
@@ -80,13 +88,15 @@ const AppSidebar = () => {
 
         <SidebarGroup>
           <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <GoDot />
-                <Link>new cate</Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-             <Link to={RouteNews}>
+            {isAdmin && (
+              <SidebarMenuItem>
+                <SidebarMenuButton>
+                  <GoDot />
+                  <Link to={RouteProgress}>Progress</Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            )}
+            <Link to={RouteNews}>
               <SidebarMenuItem>
                 <SidebarMenuButton>
                   <FaRegNewspaper className="cursor-pointer" />

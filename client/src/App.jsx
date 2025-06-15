@@ -12,6 +12,9 @@ import {
   RouteIndex,
   RouteKathmanduPost,
   RouteNews,
+  RouteProgress,
+  RouteProgressCreate,
+  RouteProgressDetail,
   RouteTechPana,
 } from "./helpers/RouteNames";
 import Index from "./Pages/Index";
@@ -29,6 +32,10 @@ import Hireme from "./Pages/hireme/Hireme";
 import ClientSignin from "./Pages/ClientSignin";
 import ClientAuthProtection from "./components/ClientAuthProtection";
 import ClientSignup from "./Pages/ClientSignup";
+import ProgressCreate from "./Pages/progress/ProgressCreate";
+import Progresses from "./Pages/progress/Progresses";
+import ProgressDetail from "./Pages/progress/ProgressDetail";
+import AdminAuthProtection from "./components/AdminAuthProtection";
 
 function App() {
   const GoogleAuthWrapper = () => {
@@ -58,11 +65,22 @@ function App() {
           <Route path={RouteEkantipur} element={<Ekantipur />}></Route>
           <Route path={RouteClientSignin} element={<ClientSignin />}></Route>
           <Route path={RouteClientSignup} element={<ClientSignup />}></Route>
-        </Route>
 
-        {/*protected routes */}
-        <Route element={<ClientAuthProtection/>}>
-          <Route path={RouteHireme} element={<Hireme />}></Route>
+          <Route element={<AdminAuthProtection />}>
+            <Route
+              path={RouteProgressCreate}
+              element={<ProgressCreate />}
+            ></Route>
+            <Route path={RouteProgress} element={<Progresses />}></Route>
+            <Route
+              path={RouteProgressDetail()}
+              element={<ProgressDetail />}
+            ></Route>
+          </Route>
+
+          <Route element={<ClientAuthProtection />}>
+            <Route path={RouteHireme} element={<Hireme />}></Route>
+          </Route>
         </Route>
 
         <Route path="*" element={<Page_404 />}></Route>
