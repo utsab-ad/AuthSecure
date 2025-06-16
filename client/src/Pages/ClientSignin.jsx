@@ -3,7 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginClient } from "../redux/clientSlice";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { RouteClientSignup, RouteIndex } from "@/helpers/RouteNames";
+import {
+  RouteAdminSignin,
+  RouteClientSignup,
+  RouteIndex,
+} from "@/helpers/RouteNames";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
+import HomeButton from "@/components/HomeButton";
 
 const ClientSignin = () => {
   const dispatch = useDispatch();
@@ -29,7 +35,7 @@ const ClientSignin = () => {
   }, [isClient, error, navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 md:p-10">
+    <div className="flex flex-col items-center justify-center min-h-[100vh] my-auto p-6 md:p-10">
       <div className="w-full pt-6 max-w-sm md:max-w-md bg-white rounded-xl shadow-md p-6">
         <h2 className="text-2xl font-bold mb-4 text-center">Client Login</h2>
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
@@ -64,14 +70,23 @@ const ClientSignin = () => {
             </p>
           )}
 
-<h4 className="flex flex-col items-center jutify-center text-center">
-  <p className="text-sm text-gray-500">Not registered ?</p>
-  <Link className="text-sm text-blue-700" to={RouteClientSignup}>
-  Register</Link>
-</h4>
-
+          <h4 className="flex flex-col items-center jutify-center text-center">
+            <p className="text-sm text-gray-500">Not registered ?</p>
+            <Link className="text-sm text-blue-700" to={RouteClientSignup}>
+              Register
+            </Link>
+          </h4>
+          <h4 className="flex flex-col items-start pt-3 jutify-center text-left">
+            <Link
+              className=" flex  items-center gap-2 text-right hover:text-blue-500 text-sm text-blue-600"
+              to={RouteAdminSignin}
+            >
+              <FaArrowLeft /> Admin Login
+            </Link>
+          </h4>
         </form>
       </div>
+      <HomeButton />
     </div>
   );
 };

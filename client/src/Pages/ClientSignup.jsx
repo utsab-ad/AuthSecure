@@ -4,6 +4,7 @@ import { registerClient } from "../redux/clientSlice";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteClientSignin, RouteIndex } from "@/helpers/RouteNames";
+import HomeButton from "@/components/HomeButton";
 
 const ClientSignup = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const ClientSignup = () => {
   }, [isClient, error, navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-center p-6 md:p-10">
+    <div className="flex flex-col items-center justify-center min-h-[100vh] my-auto p-6 md:p-10">
       <div className="w-full pt-6 max-w-sm md:max-w-md bg-white rounded-xl shadow-md p-6">
         <h2 className="text-2xl font-bold mb-4 text-center">Client Signup</h2>
         <form onSubmit={handleSignup} className="flex flex-col gap-4">
@@ -84,6 +85,7 @@ const ClientSignup = () => {
           </h4>
         </form>
       </div>
+      <HomeButton/>
     </div>
   );
 };

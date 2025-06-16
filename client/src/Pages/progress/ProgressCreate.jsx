@@ -76,7 +76,7 @@ const ProgressCreate = () => {
         {
           title,
           slug,
-          author: author || "Utsab Adhikari",
+          author,
           content,
           investedTime,
         },
@@ -162,7 +162,7 @@ const ProgressCreate = () => {
                 className="w-full px-3 py-2 rounded-lg bg-slate-700 text-slate-100 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 type="text"
                 placeholder="Your name"
-                value={author || "Utsab Adhikari"}
+                value={author}
                 required
                 onChange={(e) => setAuthor(e.target.value)}
               />
