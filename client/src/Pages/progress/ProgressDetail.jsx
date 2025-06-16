@@ -42,9 +42,9 @@ const ProgressDetail = () => {
   };
 
   return (
-    <div className=" bg-slate-900 min-h-screen text-slate-100 px-4 md:px-12 py-8 max-w-6xl mx-auto">
+    <div className=" min-h-screen text-gray-400 px-4 md:px-12 py-8 max-w-6xl mx-auto">
       <header className="mb-6">
-        <h1 className="text-4xl font-extrabold text-slate-800 dark:text-indigo-400 mb-2">
+        <h1 className="text-4xl font-extrabold text-indigo-700 mb-2">
           {progress.title}
         </h1>
         <p className="text-sm text-slate-500 italic">{progress.slug}</p>
